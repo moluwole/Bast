@@ -67,5 +67,5 @@ def application(environ, start_response):
     return iter(response)
 
 if __name__ == '__main__':
-    with make_server('', 5000, application) as server:
+    with make_server('', 2000, application) as server:
         server.serve_forever()

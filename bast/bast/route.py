@@ -1,23 +1,13 @@
-from controller import Controller
 
 class Route:
     def __init__(self):
-        self.urls = []
+        self.url = []
 
-    def get(self, url, controller):
-        print url
-        print controller
-        # print method
-        controller_class    = str(controller).split('.')[0]
-        controller_method   = str(controller).split('.')[1]
+    def get(self, url, controller_name, method_name):
+        self.url.append((url, controller_name, dict(method=method_name)))
 
-        print { 'url': url, 'controller': controller_class, 'method': controller_method }
+    def post(self, url, controller_name, method_name):
+        self.url.append((url, controller_name, dict(method=method_name)))
 
-        self.urls.append( { 'url': url, 'controller': controller_class, 'method': controller_method } )
-
-    @classmethod
-    def post(url, controller):
-        controller_class = str(controller).split('.')[0]
-        controller_method = str(controller).split('.')[1]
-
-        self.urls.append( { 'url': url, 'controller': controller_class, 'method': controller_method } )
+    def show(self):
+        return self.url

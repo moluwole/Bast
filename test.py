@@ -34,14 +34,14 @@
 
 # Route.get(controller.Controller, 'index')
 
-from bast.route import Route
 from bast.bast import Bast
+from bast.route import Route
 from test_controller import Mine
 
 route = Route()
 route.get(url='/', controller_name=Mine, method_name='index')
 route.get(url='/error', controller_name=Mine, method_name='error')
-# Route.get(Mine, 'index')
 
-app = Bast(route)
-app.run(debug=True)
+if __name__ == '__main__':
+    app = Bast(route)
+    app.run(debug=True)

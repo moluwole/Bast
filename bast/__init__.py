@@ -1,4 +1,6 @@
+import os
 import argparse
+from app.database.migration import Migration
 
 def bast():
     parser = argparse.ArgumentParser(
@@ -14,5 +16,5 @@ def bast():
         nargs='*')
 
     args = parser.parse_args()
-    return generate(args)
-
+    database = Migration()
+    return database.generate(args)

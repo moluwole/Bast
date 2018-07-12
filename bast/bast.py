@@ -2,23 +2,9 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.web import Application
 from tornado.options import define, options, parse_command_line
-from tornado.escape import json_decode, json_encode
 
 import logging
 
-
-class Json:
-    @classmethod
-    def encode(cls, json):
-        if type(json) is dict:
-            return json_encode(json)
-        return {'message': 'Not a Dictionary object'}
-
-    @classmethod
-    def decode(cls, json):
-        if type(json) is dict:
-            return json_decode(json)
-        return {'message': 'Not a Dictionary object'}
 
 class Bast:
     def __init__(self, route):

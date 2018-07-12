@@ -1,0 +1,3 @@
+[console_scripts]
+bask = bask.command_line:main
+

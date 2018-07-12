@@ -37,6 +37,9 @@
 from bast.bast import Bast
 from bast.route import Route
 from test_controller import Mine
+import sys
+
+
 
 route = Route()
 route.get(url='/', controller_name=Mine, method_name='index')

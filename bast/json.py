@@ -1,7 +1,7 @@
 from tornado.escape import json_decode, json_encode
 
 
-class json:
+class Json:
     @classmethod
     def encode(cls, json):
         if type(json) is dict:

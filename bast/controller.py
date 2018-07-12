@@ -1,10 +1,32 @@
 from tornado.web import RequestHandler
 from tornado.web import HTTPError
 import logging
-from bast import Json as json_
+from json import Json as json_
+from view import TemplateRendering
+import os
 
 
-class Controller(RequestHandler):
+class Controller(RequestHandler, TemplateRendering):
+
+    def view(self, template_name, kwargs):
+        """
+        This is for making some extra context variables available to
+        the template
+        """
+        # static_folder   = os.environ['STATIC_FOLDER']
+        # template_folder = os.environ['TEMPLATE_FOLDER']
+        # app_name        = os.environ['APP_NAME']
+
+        kwargs.update({
+            'settings': self.settings,
+            'STATIC_URL': self.settings.get('static_url_prefix', '/static/'),
+            'request': self.request,
+            'xsrf_token': self.xsrf_token,
+            'xsrf_form_html': self.xsrf_form_html,
+        })
+        content = self.render_template(template_name, kwargs)
+        self.write(content)
+
     def data_received(self, chunk):
         pass
 

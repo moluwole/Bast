@@ -1,4 +1,4 @@
-from bast.controller import Controller
+from bast.bast import Controller
 
 
 class Mine(Controller):

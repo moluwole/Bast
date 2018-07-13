@@ -3,3 +3,4 @@ venv
 *.pyc
 bastenv
 .idea
+bask.egg-info

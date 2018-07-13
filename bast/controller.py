@@ -1,7 +1,7 @@
 from tornado.web import RequestHandler
 from tornado.web import HTTPError
 import logging
-from json import Json as json_
+from _json_ import Json as json_
 from view import TemplateRendering
 import os
 

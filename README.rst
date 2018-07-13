@@ -8,11 +8,6 @@ A lightweight but easy to use framework
 
     A Simple but Elegant MVC Framework
 
-Contributors
-~~~~~~~~~~~~~~~~~~
-    Majiyagbe Oluwole
-
-    Azeez Abiodun Solomon
 
 Sample Code
 ~~~~~~~~~~~~
@@ -33,3 +28,9 @@ Sample Code
         app = Bast(route)
         app.run(debug=True)
 
+Contributors
+~~~~~~~~~~~~~~~~~~
+.. code:: bash
+
+    $ Majiyagbe Oluwole
+    $ Azeez Abiodun Solomon

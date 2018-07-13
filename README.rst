@@ -4,7 +4,7 @@ BAST Framework
     :width: 10px
     :height: 10px
 
-This Framework is a new framework developed by Majiyagbe Oluwole & Azeez Abiodun Solomon
+A lightweight but easy to use framework
 
     A Simple but Elegant MVC Framework
 
@@ -13,3 +13,22 @@ Contributors
     Majiyagbe Oluwole
 
     Azeez Abiodun Solomon
+
+Sample Code
+~~~~~~~~~~~~~~~~~~
+```python
+from bast.bast import Bast
+from bast.route import Route
+
+# Import Controller here
+from app.controller import UserController
+
+route = Route()
+
+route.get('/index', UserController, 'index')
+route.post('/insert', UserController, 'register')
+
+if '__name__' == '__main__':
+    app = Bast(route)
+    app.run(debug=True)
+```

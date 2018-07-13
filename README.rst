@@ -10,6 +10,5 @@ This Framework is a new framework developed by Majiyagbe Oluwole & Azeez Abiodun
 
 Contributors
 ~~~~~~~~~~~~~~~~~~
-.. code:: pycon
-    >>> Majiyagbe Oluwole
-    >>> Azeez Abiodun Solomon
+    Majiyagbe Oluwole
+    Azeez Abiodun Solomon

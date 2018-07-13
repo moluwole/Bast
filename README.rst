@@ -14,6 +14,8 @@ Contributors
 
     Azeez Abiodun Solomon
 
+Sample Code
+~~~~~~~~~~~~
 .. code:: python
 
     from bast.bast import Bast

@@ -16,19 +16,19 @@ Contributors
 
 Sample Code
 ~~~~~~~~~~~~~~~~~~
-```python
-from bast.bast import Bast
-from bast.route import Route
+.. code:: python
+    from bast.bast import Bast
+    from bast.route import Route
 
-# Import Controller here
-from app.controller import UserController
+    # Import Controller here
+    from app.controller import UserController
 
-route = Route()
+    route = Route()
 
-route.get('/index', UserController, 'index')
-route.post('/insert', UserController, 'register')
+    route.get('/index', UserController, 'index')
+    route.post('/insert', UserController, 'register')
 
-if '__name__' == '__main__':
-    app = Bast(route)
-    app.run(debug=True)
-```
+    if '__name__' == '__main__':
+        app = Bast(route)
+        app.run(debug=True)
+

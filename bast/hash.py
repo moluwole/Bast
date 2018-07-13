@@ -18,11 +18,16 @@ class Hash:
     def encrypt(cls, plain_text, method='normal'):
         plain_text = str(plain_text).encode('utf-8')
         if method is 'kdf':
-            return bcrypt.kdf(password=plain_text, salt=bcrypt.gensalt(12), desired_key_bytes=32, rounds=100)
-        return bcrypt.hashpw(plain_text, bcrypt.gensalt(12))
+            return bcrypt.kdf(password=plain_text, salt=cls.gensalt(12), desired_key_bytes=32, rounds=100)
+        return bcrypt.hashpw(plain_text, cls.gensalt(12))
 
     @classmethod
     def compare(cls, plain_text, hash_text):
         plain_text = str(plain_text).encode('utf-8')
         hash_text = str(hash_text).encode('utf-8')
         return bcrypt.checkpw(plain_text, hash_text)
+
+    @classmethod
+    def gensalt(cls, rounds=12, prefix=b"2b"):
+        return bcrypt.gensalt(rounds, prefix)
+

@@ -4,7 +4,6 @@ from test_controller import Mine
 import sys
 
 
-
 route = Route()
 route.get(url='/', controller_name=Mine, method_name='index')
 route.get(url='/error', controller_name=Mine, method_name='error')

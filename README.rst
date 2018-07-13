@@ -16,7 +16,7 @@ Contributors
 
 Sample Code
 ~~~~~~~~~~~~~~~~~~
-.. code:: python
+.. code-block:: python
     from bast.bast import Bast
     from bast.route import Route
 

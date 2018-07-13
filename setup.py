@@ -23,6 +23,7 @@ setup(name='bast',
       license='MIT',
       packages=['bast'],
       install_requires=[
+          'tornado',
           'argparse'
       ],
       test_suite='nose.collector',

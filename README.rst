@@ -14,19 +14,20 @@ Contributors
 
     Azeez Abiodun Solomon
 
-.. code-block:: python
-from bast.bast import Bast
-from bast.route import Route
+.. code:: python
 
-# Import Controller here
-from app.controller import UserController
+    from bast.bast import Bast
+    from bast.route import Route
 
-route = Route()
+    # Import Controller here
+    from app.controller import UserController
 
-route.get('/index', UserController, 'index')
-route.post('/insert', UserController, 'register')
+    route = Route()
 
-if '__name__' == '__main__':
-    app = Bast(route)
-    app.run(debug=True)
+    route.get('/index', UserController, 'index')
+    route.post('/insert', UserController, 'register')
+
+    if '__name__' == '__main__':
+        app = Bast(route)
+        app.run(debug=True)
 

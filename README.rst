@@ -9,8 +9,6 @@ A Simple but Elegant MVC Framework
 
 Contributors
 ============
-
 .. code:: bash
     $ Majiyagbe Oluwole
-.. code:: bash
     $ Azeez Abiodun Solomon

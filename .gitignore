@@ -3,3 +3,5 @@ venv
 *.pyc
 bastenv
 .idea
+bast.egg-info
+bast/app/.DS_Store

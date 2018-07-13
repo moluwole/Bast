@@ -6,29 +6,16 @@ def readme():
         return f.read()
 
 
-setup(name='bast',
-      version='0.1',
-      description='Simple Web Framework yet Elegant with MVC Patterns',
-      long_description=readme(),
-      classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Text Processing :: Linguistic',
-      ],
-      keywords='funniest joke comedy flying circus',
-      url='http://github.com/storborg/funniest',
-      author='Azeez Abiodun S. | Majiyagbe Oluwole',
-      author_email='flyingcircus@example.com',
-      license='MIT',
-      packages=['bast'],
-      install_requires=[
-          'argparse'
-      ],
-      test_suite='nose.collector',
-      tests_require=['nose', 'nose-cover3'],
-      entry_points={
-          'console_scripts': ['bast=bast.command_line:main'],
-      },
-      include_package_data=True,
-      zip_safe=False)
+setup(
+    name='bast',
+    version='0.1',
+    py_modules=['bast'],
+    install_requires=[
+        'argparse',
+        'Flask-Migrate'
+    ],
+    entry_points='''
+        [console_scripts]
+        bast_cli=bast_cli:cli
+    ''',
+)

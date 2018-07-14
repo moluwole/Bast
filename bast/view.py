@@ -4,7 +4,7 @@ import os
 
 def script(js_file):
     if 'http' in js_file:
-        return '<script type="text/javascript" src="' + js_file + '"></script'
+        return '<script type="text/javascript" src="' + js_file + '"></script>'
     static_folder = os.environ['STATIC_FILES']
     return '<script type="text/javascript" src="' + str(static_folder) + '/' + js_file + '"></script>'
 

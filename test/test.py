@@ -12,7 +12,7 @@ def run_cmd(cmd):
     return stdout, stderr, process.wait()
 
 
-class TestController(unittest.TestCase):
+class Test(unittest.TestCase):
     def setUp(self):
         os.environ['APP_NAME'] = __name__
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.dirname(__file__), 'public/templates')

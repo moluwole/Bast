@@ -45,7 +45,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            python test/test_controller.py
+            python test/test.py
 #            python manage.py test
 
       - store_artifacts:

@@ -1,7 +1,8 @@
 from bast.bast import Bast
 from bast.route import Route
-from test_controller import Mine
-import sys
+
+# User Defined Controllers
+from example.app.controller.test_controller import Mine
 
 
 route = Route()

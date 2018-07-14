@@ -3,7 +3,6 @@ import shlex
 import subprocess
 import unittest
 
-from bast.controller import Controller
 
 
 def run_cmd(cmd):
@@ -13,7 +12,7 @@ def run_cmd(cmd):
     return stdout, stderr, process.wait()
 
 
-class TestController(unittest.TestCase, Controller):
+class TestController(unittest.TestCase):
     def setUp(self):
         os.environ['APP_NAME'] = __name__
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.dirname(__file__), 'public/templates')

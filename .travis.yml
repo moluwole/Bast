@@ -12,5 +12,8 @@ branches:
     - master
     - develop
 
+script:
+  - unittest
+
 notifications:
   email: false

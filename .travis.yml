@@ -1,0 +1,16 @@
+os: linux
+sudo: false
+language: python
+
+install:
+  - pip install tornado
+  - pip install bcrypt
+  - pip install jinja2
+
+branches:
+  only:
+    - master
+    - develop
+
+notifications:
+  email: false

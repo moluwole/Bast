@@ -30,10 +30,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            pip install virtualenv
-            sudo virtualenv venv
-            source venv/bin/activate
-            sudo pip install -r requirements.txt
+            pip install -r requirements.txt
 
       - save_cache:
           paths:
@@ -48,7 +45,6 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
             python test/test_controller.py
 #            python manage.py test
 

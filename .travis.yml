@@ -13,7 +13,7 @@ branches:
     - develop
 
 script:
-  - pytest
+  - python test/test_controller.py
 
 notifications:
   email: false

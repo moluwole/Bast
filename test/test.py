@@ -32,6 +32,16 @@ class Test(unittest.TestCase):
         hashed = Hash.encrypt(password)
         self.assertTrue(isinstance(hashed, str))
 
+    def test_script(self):
+        from bast.view import script
+        script_link = script("http://bootstrap.css")
+        self.assertEqual('<script type="text/javascript" src="http://bootstrap.css"></script>', script_link)
+
+    def test_css(self):
+        from bast.view import css
+        css_link = css('http://mycssfile.com')
+        self.assertEqual('<link rel="stylesheet" href="http://mycssfile.com">', css_link)
+
     def test_run_server(self):
         from bast.route import Route
         from bast.bast import Bast

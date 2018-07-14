@@ -45,7 +45,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            python test/test.py
+            python -m unittest discover
 #            python manage.py test
 
       - store_artifacts:

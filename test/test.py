@@ -35,22 +35,22 @@ class Test(unittest.TestCase):
     def test_script(self):
         from bast.view import script
         script_link = script("http://bootstrap.css")
-        self.assertEqual('<script type="text/javascript" src="http://bootstrap.css"></script>', script_link)
+        self.assertEqual('<script type="text/javascript" src="http://bootstrap.css"></script>', script_link, "Not equal")
 
     def test_css(self):
         from bast.view import css
         css_link = css('http://mycssfile.com')
         self.assertEqual('<link rel="stylesheet" href="http://mycssfile.com">', css_link)
 
-    def test_run_server(self):
-        from bast.route import Route
-        from bast.bast import Bast
-
-        route = Route()
-        route.get('/index', self, 'test_route')
-
-        app = Bast(route)
-        app.run()
+    # def test_run_server(self):
+    #     from bast.route import Route
+    #     from bast.bast import Bast
+    #
+    #     route = Route()
+    #     route.get('/index', self, 'test_route')
+    #
+    #     app = Bast(route)
+    #     app.run()
 
     def test_routes(self):
         from bast.route import Route

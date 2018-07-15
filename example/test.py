@@ -1,6 +1,7 @@
+from route.link import route
+
 from bast.bast import Bast
-from .route.route import route_
 
 if __name__ == '__main__':
-    app = Bast(route_)
+    app = Bast(route)
     app.run(debug=True)

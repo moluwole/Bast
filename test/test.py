@@ -30,7 +30,16 @@ class Test(unittest.TestCase):
         from bast.hash import Hash
         password = 'bast test password'
         hashed = Hash.encrypt(password)
+        print(hashed)
         self.assertTrue(isinstance(hashed, str))
+
+    def test_compare(self):
+        from bast.hash import Hash
+        password = "basrtest".encode('utf-8')
+        hashed = Hash.encrypt(password)
+
+        print(hashed, password)
+        self.assertEqual(Hash.compare(password, hashed), True)
 
     def test_script(self):
         from bast.view import script

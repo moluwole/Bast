@@ -13,18 +13,10 @@ Sample Code
 ~~~~~~~~~~~~
 .. code:: python
 
+    from route.link import route
     from bast.bast import Bast
-    from bast.route import Route
 
-    # Import Controller here
-    from app.controller import UserController
-
-    route = Route()
-
-    route.get('/index', UserController, 'index')
-    route.post('/insert', UserController, 'register')
-
-    if '__name__' == '__main__':
+    if __name__ == '__main__':
         app = Bast(route)
         app.run(debug=True)
 

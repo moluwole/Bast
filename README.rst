@@ -19,6 +19,7 @@ Sample Code
     route.get(url='/', controller_name=Mine, method_name='index')
     route.get(url='/error', controller_name=Mine, method_name='error')
 
+
 .. code-block:: python
 
     from route.link import route

@@ -14,4 +14,4 @@ script:
   - python -m unittest discover
 
 notifications:
-  email: false
+  email: true

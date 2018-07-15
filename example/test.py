@@ -1,14 +1,6 @@
 from bast.bast import Bast
-from bast.route import Route
-
-# User Defined Controllers
-from example.app.controller.test_controller import Mine
-
-
-route = Route()
-route.get(url='/', controller_name=Mine, method_name='index')
-route.get(url='/error', controller_name=Mine, method_name='error')
+from .route.route import route_
 
 if __name__ == '__main__':
-    app = Bast(route)
+    app = Bast(route_)
     app.run(debug=True)

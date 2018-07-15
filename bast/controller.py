@@ -1,9 +1,11 @@
-from tornado.web import RequestHandler
-from tornado.web import HTTPError
 import logging
-from _json_ import Json as json_
-from view import TemplateRendering
-import os
+
+from tornado.web import HTTPError
+from tornado.web import RequestHandler
+
+from .json_ import Json as json_
+# from _json_ import Json as json_
+from .view import TemplateRendering
 
 
 class Controller(RequestHandler, TemplateRendering):
@@ -79,7 +81,7 @@ class Controller(RequestHandler, TemplateRendering):
             else:
                 raise HTTPError(404)
         except AttributeError as e:
-            logging.error(e.message)
+            logging.error(str(e))
             raise HTTPError(log_message="Controller Function not found")
 
     def post(self, *args, **kwargs):
@@ -90,5 +92,5 @@ class Controller(RequestHandler, TemplateRendering):
             else:
                 raise HTTPError(404)
         except AttributeError as e:
-            logging.error(e.message)
+            logging.error(str(e))
             raise HTTPError(log_message="Controller Function not found")

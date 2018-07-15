@@ -11,7 +11,7 @@ A lightweight but easy to use framework
 
 Sample Code
 ~~~~~~~~~~~~
-.. code-block:: python
+.. code:: python
     from bast.route import Route
     from example.controller.test_controller import Mine
 
@@ -20,7 +20,7 @@ Sample Code
     route.get(url='/error', controller_name=Mine, method_name='error')
 
 
-.. code-block:: python
+.. code:: python
 
     from route.link import route
     from bast.bast import Bast

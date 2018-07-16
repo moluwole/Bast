@@ -6,15 +6,13 @@ from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 def script(js_file):
     if 'http' in js_file:
         return '<script type="text/javascript" src="' + js_file + '"></script>'
-    static_folder = os.environ['STATIC_FILES']
-    return '<script type="text/javascript" src="' + str(static_folder) + '/' + js_file + '"></script>'
+    return '<script type="text/javascript" src="/script/' + js_file + '"></script>'
 
 
 def css(css_file):
     if 'http' in css_file:
         return '<link rel="stylesheet" href="' + css_file + '">'
-    static_folder = os.environ['STATIC_FILES']
-    return '<link rel="stylesheet" href="' + str(static_folder) + '/' + css_file + '">'
+    return '<link rel="stylesheet" href="/css/' + css_file + '">'
 
 
 class TemplateRendering:

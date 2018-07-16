@@ -24,7 +24,6 @@ class Hash:
     @classmethod
     def compare(cls, plain_text, hash_text):
         plain_text = str(plain_text).encode('utf-8')
-        hash_text = str(hash_text).encode('utf-8')
         return bcrypt.checkpw(plain_text, hash_text)
 
     @classmethod

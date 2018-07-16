@@ -1,8 +1,8 @@
 import logging
 
-from tornado.web import HTTPError
 from tornado.web import RequestHandler
 
+from .exception import BastException
 from .json_ import Json as json_
 # from _json_ import Json as json_
 from .view import TemplateRendering
@@ -10,7 +10,7 @@ from .view import TemplateRendering
 
 class Controller(RequestHandler, TemplateRendering):
 
-    def view(self, template_name, kwargs):
+    def view(self, template_name, kwargs=None):
         """
         This is for making some extra context variables available to
         the template
@@ -19,14 +19,17 @@ class Controller(RequestHandler, TemplateRendering):
         # template_folder = os.environ['TEMPLATE_FOLDER']
         # app_name        = os.environ['APP_NAME']
 
-        kwargs.update({
-            'settings': self.settings,
-            'STATIC_URL': self.settings.get('static_url_prefix', '/static/'),
-            'request': self.request,
-            'xsrf_token': self.xsrf_token,
-            'xsrf_form_html': self.xsrf_form_html,
-        })
-        content = self.render_template(template_name, kwargs)
+        # kwargs.update({
+        #     'settings': self.settings,
+        #     # 'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
+        #     # 'STATIC_URL': '',
+        #     'request': self.request,
+        #     'xsrf_token': self.xsrf_token,
+        #     'xsrf_form_html': self.xsrf_form_html,
+        # })
+        if kwargs is None:
+            kwargs = dict()
+        content = self.render_template(template_name, **kwargs)
         self.write(content)
 
     def data_received(self, chunk):
@@ -79,10 +82,10 @@ class Controller(RequestHandler, TemplateRendering):
             if func:
                 func()
             else:
-                raise HTTPError(404)
+                raise BastException(404, "Not Found")
         except AttributeError as e:
             logging.error(str(e))
-            raise HTTPError(log_message="Controller Function not found")
+            raise BastException(500, "Controller Function not found")
 
     def post(self, *args, **kwargs):
         try:
@@ -90,7 +93,29 @@ class Controller(RequestHandler, TemplateRendering):
             if func:
                 func()
             else:
-                raise HTTPError(404)
+                raise BastException(404, "Not Found")
         except AttributeError as e:
             logging.error(str(e))
-            raise HTTPError(log_message="Controller Function not found")
+            raise BastException(500, "Controller Function not found")
+
+    def put(self, *args, **kwargs):
+        try:
+            func = getattr(self, self.method)
+            if func:
+                func()
+            else:
+                raise BastException(404, "Not Found")
+        except AttributeError as e:
+            logging.error(str(e))
+            raise BastException(500, "Controller Function not found")
+
+    def delete(self, *args, **kwargs):
+        try:
+            func = getattr(self, self.method)
+            if func:
+                func()
+            else:
+                raise BastException(404, "Not Found")
+        except AttributeError as e:
+            logging.error(str(e))
+            raise BastException(500, "Controller Function not found")

@@ -26,12 +26,12 @@ class Test(unittest.TestCase):
     def tearDown(self):
         os.environ.clear()
 
-    def test_hash(self):
-        from bast.hash import Hash
-        password = 'bast test password'
-        hashed = Hash.encrypt(password)
-        print(hashed)
-        self.assertTrue(isinstance(hashed, str))
+    # def test_hash(self):
+    #     from bast.hash import Hash
+    #     password = 'bast test password'
+    #     hashed = Hash.encrypt(password)
+    #     print(hashed)
+    #     self.assertTrue(isinstance(hashed, str))
 
     def test_compare(self):
         from bast.hash import Hash

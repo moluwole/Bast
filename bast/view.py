@@ -1,5 +1,6 @@
-from jinja2 import Environment, FileSystemLoader, TemplateNotFound, PackageLoader, select_autoescape
 import os
+
+from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
 
 def script(js_file):
@@ -18,7 +19,7 @@ def css(css_file):
 
 class TemplateRendering:
 
-    def render_template(self, template_name, kwargs):
+    def render_template(self, template_name, **kwargs):
         template_dir = os.environ['TEMPLATE_FOLDER']
 
         env = Environment(loader=FileSystemLoader(template_dir))
@@ -30,5 +31,5 @@ class TemplateRendering:
             template = env.get_template(template_name)
         except TemplateNotFound:
             raise TemplateNotFound(template_name)
-        content = template.render(kwargs)
+        content = template.render(**kwargs)
         return content

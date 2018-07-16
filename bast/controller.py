@@ -4,7 +4,6 @@ from tornado.web import RequestHandler
 
 from .exception import BastException
 from .json_ import Json as json_
-# from _json_ import Json as json_
 from .view import TemplateRendering
 
 
@@ -15,20 +14,17 @@ class Controller(RequestHandler, TemplateRendering):
         This is for making some extra context variables available to
         the template
         """
-        # static_folder   = os.environ['STATIC_FOLDER']
-        # template_folder = os.environ['TEMPLATE_FOLDER']
-        # app_name        = os.environ['APP_NAME']
-
-        # kwargs.update({
-        #     'settings': self.settings,
-        #     # 'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
-        #     # 'STATIC_URL': '',
-        #     'request': self.request,
-        #     'xsrf_token': self.xsrf_token,
-        #     'xsrf_form_html': self.xsrf_form_html,
-        # })
         if kwargs is None:
             kwargs = dict()
+
+        kwargs.update({
+            'settings': self.settings,
+            'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
+            'request': self.request,
+            'xsrf_token': self.xsrf_token,
+            'xsrf_form_html': self.xsrf_form_html,
+        })
+
         content = self.render_template(template_name, **kwargs)
         self.write(content)
 

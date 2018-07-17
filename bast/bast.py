@@ -7,7 +7,11 @@
 
 import logging
 import os
-from configparser import ConfigParser
+
+try:
+    from configparser import ConfigParser
+except ImportError:
+    import configparser as ConfigParser
 
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop

@@ -7,7 +7,10 @@
 
 from tornado.web import HTTPError
 
-from bast.view import TemplateRendering
+from .view import TemplateRendering
+
+
+# from bast.view import TemplateRendering
 
 
 class BastException(HTTPError, TemplateRendering):

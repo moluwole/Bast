@@ -11,7 +11,7 @@ import os
 try:
     from configparser import ConfigParser
 except ImportError:
-    import configparser as ConfigParser
+    import ConfigParser
 
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop

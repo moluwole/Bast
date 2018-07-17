@@ -1,5 +1,5 @@
 # from .app.controller.test_controller import Mine
-from bast.route import Route
+from bast import Route
 from example.controller.controller import Mine
 
 route = Route()

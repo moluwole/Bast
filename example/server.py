@@ -1,6 +1,6 @@
 from route.link import route
 
-from bast.bast import Bast
+from bast import Bast
 
 if __name__ == '__main__':
     app = Bast(route)

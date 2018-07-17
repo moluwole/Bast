@@ -1,3 +1,10 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
+
 from tornado.web import HTTPError
 
 from bast.view import TemplateRendering

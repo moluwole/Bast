@@ -1,6 +1,17 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
 
 
 class Route:
+    """
+    Route Class. Appends the URL, Controller Instance and Method to a list instance to be passed on to the server
+    instance
+
+    """
     def __init__(self):
         self.url = []
 

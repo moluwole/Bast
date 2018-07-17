@@ -1,3 +1,10 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
+
 import logging
 import os
 from configparser import ConfigParser
@@ -11,6 +18,8 @@ from tornado.web import Application, StaticFileHandler
 class Bast:
     def __init__(self, route):
         """
+         Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
+
         Constructor for the Bast Server. Takes an instance of the route as parameter.
         The Web handler with routes are handled here.
 

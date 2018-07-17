@@ -1,8 +1,16 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
+
 import bcrypt
 
 
 class Hash:
     """
+     Hash Plain Values using Python bcrypt (https://pypi.org/project/bcrypt/)
     Example Usage
     hashed_password = Hash.encrypt(text_to_encrypt)
 

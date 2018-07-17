@@ -1,9 +1,14 @@
 import argparse
 
 from .app.database.migration import Migration
+from .bast import Bast
+from .controller import Controller
+from .hash import Hash
+from .route import Route
 
 
 # from .database.migration import Migration
+
 
 def bast():
     parser = argparse.ArgumentParser(

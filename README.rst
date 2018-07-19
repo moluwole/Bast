@@ -12,7 +12,7 @@ A lightweight but easy to use framework
 Sample Code
 ~~~~~~~~~~~~
 .. code:: python
-    from bast.route import Route
+from bast import Route
     from example.controller.test_controller import Mine
 
     route = Route()
@@ -23,7 +23,7 @@ Sample Code
 .. code:: python
 
     from route.link import route
-    from bast.bast import Bast
+    from bast import Bast
 
     if __name__ == '__main__':
         app = Bast(route)

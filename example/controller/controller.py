@@ -11,6 +11,3 @@ class Mine(Controller):
                 'pass': Hash.encrypt(request_data['pass']), 'header': "From Temp", 'is_hash': is_hash}
         # self.json(data)
         self.view('index.html', data)
-
-    def abbey_test(self, param):
-        self.json({'message': 'Abbey Web'})

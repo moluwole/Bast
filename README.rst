@@ -12,7 +12,8 @@ A lightweight but easy to use framework
 Sample Code
 ~~~~~~~~~~~~
 .. code:: python
-from bast import Route
+
+    from bast import Route
     from example.controller.test_controller import Mine
 
     route = Route()

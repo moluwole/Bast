@@ -6,6 +6,7 @@
 """
 
 import logging
+import traceback
 
 from tornado.web import RequestHandler
 
@@ -15,6 +16,22 @@ from .view import TemplateRendering
 
 
 class Controller(RequestHandler, TemplateRendering):
+
+    def write_error(self, status_code, **kwargs):
+        """
+        Handle Exceptions from the server
+        :param status_code:
+        :param kwargs:
+        :return:
+        """
+        reason = self._reason
+        if self.settings.get("serve_traceback") and "exc_info" in kwargs:
+            error = []
+            for line in traceback.format_exception(*kwargs["exc_info"]):
+                error.append(line)
+        else:
+            error = None
+        self.write(html_error(status_code, reason, error))
 
     def view(self, template_name, kwargs=None):
         """
@@ -122,3 +139,141 @@ class Controller(RequestHandler, TemplateRendering):
         except AttributeError as e:
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
+
+    # def validate(self, params):
+    #     for i in range(0, len(params)):
+    #         if self.get_argument(params[i]) is None:
+    #             return False
+    #     return True
+
+
+def html_error(code, message, _traceback=None):
+    """
+    Render Error code as HTML for better viewing
+    :param code:
+    :param message:
+    :param _traceback:
+    :return:
+    """
+    message_ = """
+            <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Arrrgghh!! Exception </title>
+                    <link rel="stylesheet" href="style.css">
+                    <style>
+                        body {
+                            margin: 0px auto;
+                            padding: 0px;
+                            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                        }
+                        
+                        .h-text {
+                            color: #993300;
+                        }
+                        
+                        .container {
+                            width: 70%;
+                            margin: 40px auto;
+                            padding: 20px;
+                            box-shadow: 1px 1px 1px 1px #ccc;
+                            background: #F8F6F8;
+                        }
+                        
+                        .image {
+                            width: 100px;
+                            max-width: 100%;
+                            opacity: 0.6;
+                        }
+                        
+                        hr {
+                            border-width: 1px;
+                            border-color: #991100;
+                        }
+                        
+                        .show-more{
+                            padding-top: 10px;
+                            padding-bottom: 10px;
+                        }
+                        .show-more a {
+                            color: #993300;
+                        }
+                        
+                        .panel-error {
+                            background: #DDD;
+                            padding: 10px;
+                            color: #666;
+                        }
+                        
+                        .panel-error-editor {
+                            background: #DDD;
+                            padding: 10px;
+                            color: #666;
+                        }
+                        
+                        .error-show {
+                            color: #666;
+                        }
+                        
+                        .class {
+                            color: blue;
+                            font-weight: bold;
+                        }
+                        
+                        .method {
+                            color: #666;
+                        }
+                        
+                        .variable {
+                            color: #111;
+                        }
+
+                    </style>
+                    <script>
+                        function show_more(e) {
+                            e.preventDefault()
+                            const el = document.querySelector('.panel-error-editor')
+                            if( el.style.display == 'none') {
+                                el.style.display = 'block'
+                            } else {
+                                el.style.display = 'none'
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                    <div class="container">
+                            <img src="image/bast.png" border="0" class="image">
+                        <h1 class="h-text">""" + str(code) + " " + message + """
+                             </h1>
+                        <hr>
+                        <p class="error-show"> An Error Occurred during Execution </p> """
+
+    if _traceback is None:
+        return message_
+
+    for i in range(0, len(_traceback)):
+        if i is 0:
+            message_ += "<div class='panel-error'> <h1 class='h-text'> %s </h1> " % (_traceback[0])
+            continue
+        message_ += "<p>%s</p>" % (_traceback[i])
+
+    message_ += """
+                        </div>
+                        <div class="show-more">
+                            <a href="#" id="show-more" onclick="show_more(event)">show more stack trace</a>
+                        </div>
+                        <div class="panel-error-editor">
+                            <span class="class">class</span> <span class="method">User:</span>
+                            <p></p>
+                            &nbsp;&nbsp;<span class="method">def</span> <span class="variable">__init__</span>:
+                        </div>
+                    </div>
+                </body>
+                </html>
+    """
+
+    return message_

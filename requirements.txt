@@ -1,5 +1,4 @@
 backports-abc==0.5
-bast==0.1
 bcrypt==3.1.4
 cffi==1.11.5
 Jinja2==2.10

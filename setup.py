@@ -26,7 +26,7 @@ setup(name='bast',
       url='https://github.com/moluwole/Bast',
       author='Majiyagbe Oluwole',
       author_email='oluwole564@gmail.com',
-      contributors=['Majiyagbe Oluwole', 'Azeez Abiodun Solomon'],
+      maintainer=['Majiyagbe Oluwole', 'Azeez Abiodun Solomon'],
       license='MIT',
       packages=['bast'],
       platforms='any',
@@ -38,7 +38,7 @@ setup(name='bast',
           'jinja2'
       ],
       entry_points={
-          'console_scripts': ['bast=bast.cli:main'],
+          'console_scripts': ['panther=bast.cli:main'],
       },
       include_package_data=True,
       zip_safe=False)

@@ -13,20 +13,23 @@ from .hash import Hash
 from .migration import Migration
 from .route import Route
 
+__version__ = "1.0"
+
 
 def bast():
     parser = argparse.ArgumentParser(
-        description='This does almost nothing'
+        description='The Command Line Parser for the Bast Framework'
     )
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version='%(prog)s 2.0'
+        version='Bast Framework v%s' % __version__
     )
     parser.add_argument('-g', '--g',
-                        help='Generate Migration File: bast -g create:migration name',
+                        help='Generate Migration File: panther -g create:migration name',
                         nargs='*')
 
     args = parser.parse_args()
     database = Migration()
     return database.generate(args)
+

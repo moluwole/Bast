@@ -13,17 +13,25 @@ class Json:
      Encode and Decode Json values from dictionary objects using Tornado's Json Encode and Decode
      (http://www.tornadoweb.org/en/stable/escape.html)
     """
-    def __init__(self):
-        self.json = {}
 
     @classmethod
     def encode(cls, json):
+        """
+        Checks the type of data passed to the be encoded.
+        :param json:
+        :return:
+        """
         if type(json) is dict:
             return json_encode(json)
-        return {'message': 'Not a Dictionary object'}
+        return json_encode({'message': 'Not a Dictionary object'})
 
     @classmethod
     def decode(cls, json):
+        """
+        Checks the type of data to be decoded
+        :param json:
+        :return:
+        """
         if type(json) is dict:
             return json_decode(json)
-        return {'message': 'Not a Dictionary object'}
+        return "Not a Dictionary Object"

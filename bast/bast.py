@@ -18,6 +18,12 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
 
+__author__ = "Majiyagbe Oluwole"
+__copyright__ = ""
+__credits__ = ["Majiyagbe Oluwole", "Azeez Abiodun Solomon"]
+__license__ = "Apache 2.0"
+__version__ = "1.0"
+__status__ = "Under Development"
 
 class Bast:
     def __init__(self, route):

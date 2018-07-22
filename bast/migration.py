@@ -1,6 +1,7 @@
 import datetime
 import os
 
+
 class Migration:
     def generate(self, args):
         if args.g[0] == 'create:migration' and type(args.g[1]) == str:

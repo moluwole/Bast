@@ -253,6 +253,7 @@ def html_error(code, message, _traceback=None):
                         <p class="error-show"> An Error Occurred during Execution </p> """
 
     if _traceback is None:
+        message_ += "</div></body>"
         return message_
 
     for i in range(0, len(_traceback)):

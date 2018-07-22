@@ -246,7 +246,6 @@ def html_error(code, message, _traceback=None):
                 </head>
                 <body>
                     <div class="container">
-                            <img src="image/bast.png" border="0" class="image">
                         <h1 class="h-text">""" + str(code) + " " + message + """
                              </h1>
                         <hr>

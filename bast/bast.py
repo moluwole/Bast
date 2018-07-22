@@ -42,6 +42,8 @@ class Bast:
         self.handler = route.show()
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
         self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
+        self.handler.append(
+            (r'/images/(.*)', StaticFileHandler, {"path": os.path.abspath('.') + "/public/static/images"}))
 
     def run(self, port=2000, host="127.0.0.1", debug=False):
         """

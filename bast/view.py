@@ -34,6 +34,19 @@ def css(css_file):
     return '<link rel="stylesheet" href="/css/' + css_file + '">'
 
 
+def image(image_file, alt_name="image"):
+    """
+    Returns a route to the image file and renders it to the server
+    Error 404 is thrown in server log if not found
+    :param alt_name:
+    :param image_file:
+    :return:
+    """
+    if 'http' in image_file:
+        return '<img src="' + image_file + '" alt="' + alt_name + '">'
+    return '<img src="/images/' + image_file + '" alt="' + alt_name + '">'
+
+
 class TemplateRendering:
     """
     Base class to load the template directory from the OS Environment TEMPLATE_FOLDER variable

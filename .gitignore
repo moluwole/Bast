@@ -4,3 +4,6 @@ venv
 bastenv
 .idea
 bask.egg-info
+build
+dist
+bast.egg-info

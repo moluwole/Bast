@@ -36,3 +36,7 @@ Contributors
 
     $ Majiyagbe Oluwole
     $ Azeez Abiodun Solomon
+
+License
+~~~~~~~~~
+This Framework is Licensed under MIT License

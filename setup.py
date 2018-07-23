@@ -35,7 +35,8 @@ setup(name='bast',
           'tornado',
           'argparse',
           'bcrypt',
-          'jinja2'
+          'jinja2',
+          'gitpython'
       ],
       entry_points={
           'console_scripts': ['panther=bast.cli:main'],

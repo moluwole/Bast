@@ -10,4 +10,3 @@ from example.controller.controller import Mine
 
 route = Route()
 route.get(url='/', controller_name=Mine, method_name='index')
-route.get(url='/error', controller_name=Mine, method_name='error')

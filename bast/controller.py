@@ -246,7 +246,6 @@ def html_error(code, message, _traceback=None):
                 </head>
                 <body>
                     <div class="container">
-                            <img src="image/bast.png" border="0" class="image">
                         <h1 class="h-text">""" + str(code) + " " + message + """
                              </h1>
                         <hr>
@@ -265,12 +264,6 @@ def html_error(code, message, _traceback=None):
     message_ += """
                         </div>
                         <div class="show-more">
-                            <a href="#" id="show-more" onclick="show_more(event)">show more stack trace</a>
-                        </div>
-                        <div class="panel-error-editor">
-                            <span class="class">class</span> <span class="method">User:</span>
-                            <p></p>
-                            &nbsp;&nbsp;<span class="method">def</span> <span class="variable">__init__</span>:
                         </div>
                     </div>
                 </body>

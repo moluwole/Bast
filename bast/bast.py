@@ -26,8 +26,8 @@ __version__ = "1.0"
 __status__ = "Under Development"
 
 
-class Bast:
-    def __init__(self, route):
+class Bast(Application):
+    def __init__(self, route, **settings):
         """
          Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
 
@@ -38,6 +38,7 @@ class Bast:
         Appropriate configurations are loaded from the config file into the os environment for use
         :param route:
         """
+        super().__init__(**settings)
         self.load_config()
         self.handler = route.show()
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))

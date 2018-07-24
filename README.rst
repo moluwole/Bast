@@ -43,7 +43,10 @@ This Framework is Licensed under MIT License
 
 Credit
 ~~~~~~~
-Tornado Web Framework <https://tornadoweb.org>
-Jinja Templating <https://jinja.pocoo.org/docs/2.10>
-Orator Eloquent ORM <https://orator-orm.com>
-StackOverflow <https://stackoverflow.com>
+`Tornado Web Framework <https://tornadoweb.org>`
+
+`Jinja Templating <https://jinja.pocoo.org/docs/2.10>`
+
+`Orator Eloquent ORM <https://orator-orm.com>`
+
+`StackOverflow <https://stackoverflow.com>`

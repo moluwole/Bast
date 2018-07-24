@@ -16,6 +16,7 @@ import click
 
 
 @click.group()
+@click.version_option(__version__)
 def main():
     pass
 
@@ -34,11 +35,6 @@ def controller_creatr(filename):
     controller_file.write(compose)
     controller_file.close()
     click.echo("\033[1;32;40m Modes/Controller " + filename + " created successfully")
-
-
-@main.command('-v', short_help='Show the project version')
-def version():
-    click.echo(__version__)
 
 
 @main.command('create:view', short_help="Create a View File")

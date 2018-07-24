@@ -40,3 +40,9 @@ Contributors
 License
 ~~~~~~~~~
 This Framework is Licensed under MIT License
+
+Credit
+~~~~~~~
+Tornado Web Framework
+Jinja Templating
+Orator Eloquent ORM

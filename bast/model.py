@@ -3,43 +3,15 @@ import subprocess
 import sys
 from configparser import ConfigParser
 
-from orator.database_manager import DatabaseManager
-from orator.migrations import MigrationCreator, Migrator, DatabaseMigrationRepository
+from orator import DatabaseManager
+from orator.orm import Model
 
 
-class CreateMigration(MigrationCreator):
-    def __init__(self):
-        self.path = os.path.abspath('.') + '/database/migrations/'
-        if not os.path.exists(self.path):
-            os.makedirs(self.path)
-
-    def create_file(self, name, table, create=True):
-        return self.create(name, self.path, table=table, create=create)
-
-
-class Migration(Migrator):
-    def __init__(self):
-        db_name, config = self.get_config()
-        self.manager = DatabaseManager(config=config)
-        self.path = os.path.abspath('.') + "/database/migrations/"
-        self.repository = DatabaseMigrationRepository(resolver=self.manager, table='migrations')
-
-        if not self.repository.repository_exists():
-            self.repository.create_repository()
-
-        super().__init__(self.repository, self.manager)
-
-    def run_(self, pretend):
-        self.run(self.path, pretend=pretend)
-
-    def reset_(self, pretend):
-        self.reset(self.path, pretend)
-
-    def rollback_(self, pretend):
-        return self.rollback(self.path, pretend)
-
-    def reset_(self, pretend):
-        return self.reset(self.path, pretend)
+class Models(Model):
+    def __init__(self, **attributes):
+        super().__init__(**attributes)
+        db = DatabaseManager(self.get_config())
+        self.set_connection_resolver(db)
 
     @staticmethod
     def get_config():
@@ -54,9 +26,9 @@ class Migration(Migrator):
         db_password = config['CONFIG']['DB_PASSWORD']
         db_prefix = config['CONFIG']['DB_PREFIX']
 
-        Migration.check_packages(db_type)
+        Models.check_packages(db_type)
 
-        return db_database, {
+        return {
             db_type: {
                 'driver': db_type.strip(),
                 'host': db_host.strip(),

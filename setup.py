@@ -6,37 +6,37 @@ def readme():
         return f.read()
 
 
-setup(name='bast',
-      version='0.1',
+setup(name='Bast',
+      version='0.0.10',
       description='Simple yet Elegant Web Framework with MVC Patterns',
       long_description=readme(),
       classifiers=[
           'Development Status :: 3 - Alpha',
-          'Environment :: Web Framework',
-          'Framework :: Bast',
+          'Environment :: Web Environment',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: MIT License',
-          'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3.*',
+          'Natural Language :: English',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python :: 3',
           'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
           'Topic :: Software Development :: Libraries :: Application Frameworks',
           'Topic :: Software Development :: Libraries :: Python Modules'
       ],
-      keywords='funniest joke comedy flying circus',
+      keywords='web framework tornado ORM MVC',
       url='https://github.com/moluwole/Bast',
       author='Majiyagbe Oluwole',
       author_email='oluwole564@gmail.com',
-      maintainer=['Majiyagbe Oluwole', 'Azeez Abiodun Solomon'],
+      maintainer='Majiyagbe Oluwole | Azeez Abiodun Solomon',
       license='MIT',
       packages=['bast'],
       platforms='any',
-      python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
       install_requires=[
           'tornado',
           'argparse',
           'bcrypt',
           'jinja2',
-          'gitpython'
+          'gitpython',
+          'click'
       ],
       entry_points={
           'console_scripts': ['panther=bast.cli:main'],

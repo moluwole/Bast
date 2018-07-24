@@ -1,4 +1,3 @@
-import argparse
 import datetime
 import os
 
@@ -12,106 +11,103 @@ try:
 except ImportError:
     import ConfigParser
 import bcrypt
+import shutil
+import click
+from subprocess import call
 
 
+@click.group()
 def main():
-    parser = argparse.ArgumentParser(
-        description='The Command Line Parser for the Bast Framework',
-        formatter_class=argparse.RawTextHelpFormatter
-    )
-    parser.add_argument(
-        '-v', '--version',
-        action='version',
-        version='Bast Framework v%s' % __version__
-    )
-
-    parser.add_argument('new', metavar="new", help="Create a new project : panther new projectname", nargs='*')
-
-    parser.add_argument('-g', '--g', help="""
-                        Generate Migration File     : panther -g create:migration name
-                        Create Controller File      : panther -g create:controller ControllerName
-                        Create Model File           : panther -g create:model ModelName
-                        Create View/Template File   : panther -g create:view TemplateName
-                                                """,
-                        nargs='*')
-
-    args = parser.parse_args()
-    creator = Create()
-    return creator.generate(args)
+    pass
 
 
-class Create:
-    def generate(self, args):
-        try:
-            if args.new[0] == "new":
-                self.create_new(args.new[1])
-                return
+@main.command('create:controller', short_help='Creates a Controller File')
+@click.argument('filename', required=1)
+def controller_creatr(filename):
+    """Name of the controller file to be created"""
+    path = os.path.abspath('.') + '/controller'
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-            if type(args.g[1]) == str:
-                if args.g[0] == 'create:migration':
-                    migration = Migration()
-                    migration.__checkfolder__()
-                    filename = args.g[1] + datetime.datetime.now().strftime("%y_%m_%d_%H_%M_%S")
-                    migration.migration_creator(filename)
-                    print("\033[1;32;40m Modes/" + filename + " Migration generated successfully")
-                elif args.g[0] == 'create:controller':
-                    self.controller_creatr(args.g[1])
-                    print("\033[1;32;40m Modes/Controller " + args.g[1] + " created successfully")
-                elif args.g[0] == 'create:view':
-                    self.view_creatr(args.g[1])
-                    print("\033[1;32;40m Modes/View File " + args.g[1] + " created successfully")
-                else:
-                    print("\033[1;31;40m Command not found ")
-                    os.system("panther -h")
-        except IndexError as e:
-            print(str(e))
-            print("\033[1;31;40m File Name is required")
+    file_name = str(filename + '.py')
+    controller_file = open(os.path.abspath('.') + '/controller/' + file_name, 'w+')
+    compose = "from bast import Controller\n\nclass " + filename + "(Controller):\n\tpass"
+    controller_file.write(compose)
+    controller_file.close()
+    click.echo("\033[1;32;40m Modes/Controller " + filename + " created successfully")
 
-    @staticmethod
-    def controller_creatr(filename):
-        path = os.path.abspath('.') + '/controller'
-        if not os.path.exists(path):
-            os.makedirs(path)
 
-        file_name = str(filename + '.py')
-        controller_file = open(os.path.abspath('.') + '/controller/' + file_name, 'w+')
-        compose = "from bast import Controller\n\nclass " + filename + "(Controller):\n\tpass"
-        controller_file.write(compose)
-        controller_file.close()
+@main.command('-v', short_help='Show the project version')
+def version():
+    click.echo(__version__)
 
-    @staticmethod
-    def view_creatr(filename):
-        path = os.path.abspath('.') + '/public/templates'
-        if not os.path.exists(path):
-            os.makedirs(path)
 
-        filename_ = str(filename + ".html").lower()
-        view_file = open(path + "/" + filename_, 'w+')
-        view_file.write("")
-        view_file.close()
+@main.command('create:view', short_help="Create a View File")
+@click.argument('filename', required=1)
+def view_creatr(filename):
+    """Name of the View File to be created"""
+    path = os.path.abspath('.') + '/public/templates'
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-    @staticmethod
-    def create_new(project_name="project"):
-        git_url = "https://github.com/moluwole/Bast_skeleton"
-        path = os.path.abspath('.') + "/" + project_name
-        if not os.path.exists(path):
-            os.makedirs(path)
-        print("\033[1;32;40m Creating Project at %s.... " % path)
-        print("\033[1;32;40m Pulling Project Skeleton from Repo")
-        Repo.clone_from(git_url, path)
+    filename_ = str(filename + ".html").lower()
+    view_file = open(path + "/" + filename_, 'w+')
+    view_file.write("")
+    view_file.close()
 
-        print("\033[1;32;40m Setting up project")
 
-        # Setting up the Config File
-        config_path = path + "/config/config.ini"
-        config = ConfigParser()
-        config.read(config_path)
+@main.command('run', short_help="Run your Bast Server")
+@click.option('--serverfile', help="Name of the file to run", default='server.py')
+def run(serverfile):
+    cmd = 'python ' + serverfile
+    call(cmd)
 
-        config.set('CONFIG', 'APP_NAME', project_name)
-        hash_ = bcrypt.hashpw(str(project_name).encode('utf-8'), bcrypt.gensalt(12))
-        config.set('CONFIG', 'APP_KEY', str(hash_))
 
-        with open(config_path, 'w') as config_file:
-            config.write(config_file)
+@main.command('new', short_help="Create a new Bast Project")
+@click.argument('projectname', required=1)
+def create_new(projectname):
+    """Name of the project"""
+    git_url = "https://github.com/moluwole/Bast_skeleton"
+    path = os.path.abspath('.') + "/" + projectname
+    if not os.path.exists(path):
+        os.makedirs(path)
+    click.echo("\033[1;32;40m Creating Project at %s.... " % path)
+    click.echo("\033[1;32;40m Pulling Project Skeleton from Repo")
+    Repo.clone_from(git_url, path)
 
-        print("\033[1;32;40m New Bast Project created at  %s " % path)
+    click.echo("\033[1;32;40m Setting up project")
+
+    # Setting up the Config File
+    config_path = path + "/config/config.ini"
+
+    shutil.rmtree(path + "/.git")
+    os.remove(path + "/.gitignore")
+
+    config = ConfigParser()
+    config.read(config_path)
+
+    config.set('CONFIG', 'APP_NAME', projectname)
+    hash_ = bcrypt.hashpw(str(projectname).encode('utf-8'), bcrypt.gensalt(12))
+    config.set('CONFIG', 'APP_KEY', str(hash_))
+
+    with open(config_path, 'w') as config_file:
+        config.write(config_file)
+
+    click.echo("\033[1;32;40m New Bast Project created at  %s " % path)
+
+
+@main.command('create:migration', short_help="Create a migration file")
+@click.argument('migration_file', required=1)
+def migration_creatr(migration_file):
+    """Name of the migration file"""
+    migration = Migration()
+    migration.__checkfolder__()
+    filename = migration_file + datetime.datetime.now().strftime("%y_%m_%d_%H_%M_%S")
+    migration.migration_creator(filename)
+    click.echo("\033[1;32;40m Modes/" + filename + " Migration generated successfully")
+
+
+@main.command('create:model', short_help="Create Model File")
+@click.argument('model_file', required=1)
+def model_creatr(model_file):
+    click.echo('Coming soon')

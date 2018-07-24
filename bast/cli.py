@@ -13,7 +13,6 @@ except ImportError:
 import bcrypt
 import shutil
 import click
-from subprocess import call
 
 
 @click.group()
@@ -60,7 +59,7 @@ def view_creatr(filename):
 @click.option('--serverfile', help="Name of the file to run", default='server.py')
 def run(serverfile):
     cmd = 'python ' + serverfile
-    call(cmd)
+    os.system(cmd)
 
 
 @main.command('new', short_help="Create a new Bast Project")

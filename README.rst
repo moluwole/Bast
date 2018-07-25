@@ -29,6 +29,12 @@ Sample Code
     if __name__ == '__main__':
         app = Bast(route)
         app.run(debug=True)
+        
+Maintainer
+~~~~~~~~~~~~~~~~
+.. code:: bash
+
+    $  Majiyagbe Oluwole
 
 Contributors
 ~~~~~~~~~~~~~~~~~~

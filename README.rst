@@ -11,6 +11,7 @@ A lightweight but easy to use framework
 Usage
 ~~~~~~~~~
 .. code:: bash
+
     $ pip install Bast
     $ panther
 

@@ -32,7 +32,6 @@ setup(name='Bast',
       platforms='any',
       install_requires=[
           'tornado',
-          'argparse',
           'bcrypt',
           'jinja2',
           'gitpython',

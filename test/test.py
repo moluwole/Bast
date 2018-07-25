@@ -4,7 +4,6 @@ import subprocess
 import unittest
 
 
-
 def run_cmd(cmd):
     """Run Commands"""
     process = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -17,11 +16,6 @@ class Test(unittest.TestCase):
         os.environ['APP_NAME'] = __name__
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.dirname(__file__), 'public/templates')
         os.environ['STATIC_FILES'] = os.path.join(os.path.dirname(__file__), 'public/static')
-
-        # route = Route()
-        # route.get('/url', self, 'test_view')
-        #
-        # self.application = Bast(route)
 
     def tearDown(self):
         os.environ.clear()
@@ -36,9 +30,6 @@ class Test(unittest.TestCase):
         from bast.hash import Hash
         password = "basrtest".encode('utf-8')
         hashed = Hash.encrypt(password)
-
-        # import pdb
-        # pdb.set_trace()
 
         print(hashed, str(password))
         self.assertEqual(Hash.compare(password, hashed), True)
@@ -63,16 +54,6 @@ class Test(unittest.TestCase):
         script_link = script("myscript.js")
         self.assertEqual('<script type="text/javascript" src="/script/myscript.js"></script>', script_link,
                          "Not equal")
-
-    # def test_run_server(self):
-    #     from bast.route import Route
-    #     from bast.bast import Bast
-    #
-    #     route = Route()
-    #     route.get('/index', self, 'test_route')
-    #
-    #     app = Bast(route)
-    #     app.run()
 
     def test_routes(self):
         from bast.route import Route

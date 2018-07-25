@@ -1,3 +1,10 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
+
 import os
 
 from git import Repo
@@ -14,11 +21,31 @@ import shutil
 import click
 import re
 
+""" Handles the CLI commands and their respective Arguments """
+
 
 @click.group()
 @click.version_option(__version__)
 def main():
-    pass
+    config_path = os.path.abspath('.') + "/config/config.ini"
+    if not os.path.exists(config_path):
+        return
+
+    config = ConfigParser()
+    config.read(config_path)
+
+    #   config section
+    os.environ['APP_NAME'] = config['CONFIG']['APP_NAME']
+    os.environ['APP_KEY'] = config['CONFIG']['APP_KEY']
+    os.environ['DB_TYPE'] = config['CONFIG']['DB_TYPE']
+    os.environ['DB_NAME'] = config['CONFIG']['DB_NAME']
+    os.environ['DB_HOST'] = config['CONFIG']['DB_HOST']
+    os.environ['DB_USER'] = config['CONFIG']['DB_USER']
+    os.environ['DB_PASSWORD'] = config['CONFIG']['DB_PASSWORD']
+    os.environ['DB_PREFIX'] = config['CONFIG']['DB_PREFIX']
+
+    # print(os.environ['APP_NAME'])
+    # pass
 
 
 @main.command('create:controller', short_help='Creates a Controller File')

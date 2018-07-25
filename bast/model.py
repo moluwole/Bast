@@ -1,7 +1,13 @@
+"""
+    Bast Web Framework
+    (c) Majiyagbe Oluwole <oluwole564@gmail.com>
+
+    For full copyright and license information, view the LICENSE distributed with the Source Code
+"""
+
 import os
 import subprocess
 import sys
-from configparser import ConfigParser
 
 from orator import DatabaseManager
 from orator.orm import Model
@@ -15,16 +21,12 @@ class Models(Model):
 
     @staticmethod
     def get_config():
-        path = os.path.abspath('.') + '/config/config.ini'
-        config = ConfigParser()
-        config.read(path)
-
-        db_type = config['CONFIG']['DB_TYPE']
-        db_host = config['CONFIG']['DB_HOST']
-        db_user = config['CONFIG']['DB_USER']
-        db_database = config['CONFIG']['DB_NAME']
-        db_password = config['CONFIG']['DB_PASSWORD']
-        db_prefix = config['CONFIG']['DB_PREFIX']
+        db_type = os.environ['DB_TYPE']
+        db_host = os.environ['DB_HOST']
+        db_user = os.environ['DB_USER']
+        db_database = os.environ['DB_NAME']
+        db_password = os.environ['DB_PASSWORD']
+        db_prefix = os.environ['DB_PREFIX']
 
         Models.check_packages(db_type)
 

@@ -39,26 +39,29 @@ class Bast(Application):
         :param route:
         """
         super().__init__(**settings)
+        self.host = '127.0.0.1'
+        self.port = 2000
+        self.debug = True
+
         self.load_config()
+
         self.handler = route.show()
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
         self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
         self.handler.append(
             (r'/images/(.*)', StaticFileHandler, {"path": os.path.abspath('.') + "/public/static/images"}))
 
-    def run(self, port=2000, host="127.0.0.1", debug=False):
+    def run(self):
         """
         Function to Run the server. Server runs on host: 127.0.0.1 and port: 2000 by default. Debug is also set to false
         by default
-        They can be overridden by passing preferred values into the function
-        :param port:
-        :param host:
-        :param debug:
+
+        Can be overriden by using the config.ini file
         :return:
         """
-        define("port", default=port, help="Run on given port", type=int)
-        define("host", default=host, help="Run on given host", type=str)
-        define("debug", default=debug, help="True for development", type=bool)
+        define("port", default=self.port, help="Run on given port", type=int)
+        define("host", default=self.host, help="Run on given host", type=str)
+        define("debug", default=self.debug, help="True for development", type=bool)
 
         parse_command_line()
 
@@ -90,5 +93,9 @@ class Bast(Application):
         os.environ['DB_HOST'] = config['CONFIG']['DB_HOST']
         os.environ['DB_USER'] = config['CONFIG']['DB_USER']
         os.environ['DB_PASSWORD'] = config['CONFIG']['DB_PASSWORD']
+        os.environ['DB_PREFIX'] = config['CONFIG']['DB_PREFIX']
+        self.host = config['CONFIG']['HOST']
+        self.port = config['CONFIG']['PORT']
+        self.debug = config['CONFIG']['DEBUG']
 
         os.environ['TEMPLATE_FOLDER'] = os.path.abspath('.') + "/public/templates"

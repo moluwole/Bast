@@ -1,7 +1,6 @@
 asn1crypto==0.24.0
 backpack==0.1
 backports-abc==0.5
-Bast==0.0.1.0.1
 bcrypt==3.1.4
 blinker==1.4
 certifi==2018.4.16

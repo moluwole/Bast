@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='Bast',
-      version='0.0.1.0.2',
+      version='0.0.1.0.3',
       description='Simple yet Elegant Web Framework with MVC Patterns',
       long_description=readme(),
       classifiers=[
@@ -36,7 +36,8 @@ setup(name='Bast',
           'bcrypt',
           'jinja2',
           'gitpython',
-          'click'
+          'click',
+          'orator'
       ],
       entry_points={
           'console_scripts': ['panther=bast.cli:main'],

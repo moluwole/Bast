@@ -5,12 +5,12 @@ BAST Framework
     :width: 50
     :align: center
 
-.. csv-table:: 
+.. list-table:: 
     :widths: auto
     
-    - .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
-    - .. image:: https://img.shields.io/badge/python-3.4+-blue.svg
-    - .. image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg 
+    -.. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
+    -.. image:: https://img.shields.io/badge/python-3.4+-blue.svg
+    -.. image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg 
         :target: https://circleci.com/gh/moluwole/Bast
 
  

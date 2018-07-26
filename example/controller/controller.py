@@ -1,10 +1,10 @@
 from bast.controller import Controller
-from bast.hash import Hash
+import os
 
 
 class Mine(Controller):
     def index(self):
-        self.view('index.html')
+        self.view('index.html', {'data': os.environ['DB_NAME']})
 
     def test(self, param):
         self.write(param)

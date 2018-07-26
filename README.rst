@@ -63,6 +63,10 @@ License
 ~~~~~~~~~
 This Framework is Licensed under MIT License
 
+Credits
+~~~~~~~~~
+Bast runs on the `Tornado Web Framework`
+
 
 .. _file an issue: https://github.com/rtfd/readthedocs.org/issues
 .. _Read the Docs README: https://github.com/rtfd/readthedocs.org/blob/master/README.rst

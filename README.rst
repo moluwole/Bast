@@ -22,6 +22,16 @@ To install Bast, you can download it easily from Pypi using
 .. code:: bash
 
     $ pip install Bast
+    
+To create a setup a new project, use
+
+.. code:: bash
+    
+    $ panther new project_name
+    $ cd project
+    $ panther run
+    
+To visit the website and see if it's setup successfully, visit ``127.0.0.1:2000`` in your browser
 
 Bast comes bundled with a very powerful CLI tool called ``panther``. To show the available commands, use
 

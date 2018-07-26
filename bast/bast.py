@@ -87,12 +87,13 @@ class Bast(Application):
         #   config section
         os.environ['APP_NAME'] = config['CONFIG']['APP_NAME']
         os.environ['APP_KEY'] = config['CONFIG']['APP_KEY']
-        os.environ['DB_TYPE'] = config['CONFIG']['DB_TYPE']
-        os.environ['DB_NAME'] = config['CONFIG']['DB_NAME']
-        os.environ['DB_HOST'] = config['CONFIG']['DB_HOST']
-        os.environ['DB_USER'] = config['CONFIG']['DB_USER']
-        os.environ['DB_PASSWORD'] = config['CONFIG']['DB_PASSWORD']
-        os.environ['DB_PREFIX'] = config['CONFIG']['DB_PREFIX']
+
+        os.environ['DB_TYPE'] = config['DATABASE']['DB_TYPE']
+        os.environ['DB_NAME'] = config['DATABASE']['DB_NAME']
+        os.environ['DB_HOST'] = config['DATABASE']['DB_HOST']
+        os.environ['DB_USER'] = config['DATABASE']['DB_USER']
+        os.environ['DB_PASSWORD'] = config['DATABASE']['DB_PASSWORD']
+        os.environ['DB_PREFIX'] = config['DATABASE']['DB_PREFIX']
 
         self.host = config['CONFIG']['HOST']
         self.port = config['CONFIG']['PORT']

@@ -1,0 +1,89 @@
+body {
+    margin: 0px auto;
+    padding: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.h-text {
+    color: #993300;
+}
+
+.container {
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    background: #F8F6F8;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,      sans-serif;
+    background: #F8F6F8;
+}
+
+.h-text {
+    color: #993300;
+}
+
+.layout{
+    width: 80%;
+    margin: 10px auto;
+    height: 100vh;
+}
+
+.content-body {
+    text-align: center;
+    padding: 80px;
+}
+
+.content-body h1 {
+    font-size: 3.3em;
+    opacity: .6;
+    letter-spacing: .2em;
+}
+
+.content-body p {
+    color: #666;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.content-body ul {
+    margin: 0px;
+    padding: 10px;
+}
+
+.content-body ul li{
+    display: inline;
+    padding: 5px;
+}
+
+.content-body ul li a {
+    color: #666;
+}
+
+.image {
+    width: 300px;
+    max-width: 100%;
+    opacity: .7;
+}
+
+.footer {
+    padding-top: 10px;
+}
+
+.footer a {
+    color: #333;
+    font-size: 12px;
+}
+
+
+.method {
+    color: #666;
+}
+
+.variable {
+    color: #111;
+}

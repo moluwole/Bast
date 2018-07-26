@@ -1,13 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    {{ css('bootstrap.css') }}
-    {{ script('jquery.min.js') }}
-
-    <!--<link rel="stylesheet" href="/view/bootstrap.css">-->
-
-    <title>{{ header }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bast Framework </title>
+    {{ css('style.css') }}
 </head>
 <body>
-    <h1>THis is from a Template | {{ is_hash }}</h1>
+    <div class="layout">
+        <div class="content-body">
+            <img src="images/bast-logo.jpeg" alt="" class="image">
+            <h1 class="h-text"> Bast Framework</h1>
+            <p>Simple yet elegant python framework.</p>
+
+            <ul>
+                <li>
+                    <a href="#">Github</a>
+                </li>
+                <li>
+                    <a href="#">Stackoverflow</a>
+                </li>
+                <li>
+                    <a href="#">Documentation</a>&nbsp;  👨‍💻
+                </li>
+            </ul>
+
+            <div class="footer">
+                <p>Made with love by </p>
+                <a href="http://twitter.com/moluwole" target="_blank">@Moluwole</a> &nbsp; | &nbsp; <a href="http://twitter.com/habbeboy" target="_blank">iamhabbeboy</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

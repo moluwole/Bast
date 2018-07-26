@@ -68,7 +68,7 @@ This Framework is Licensed under MIT License
 .. _Jinja Templating: https://jinja.pocoo.org/docs/2.10
 .. _Orator ORM: https://orator-orm.com
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
-.. |circlci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
+.. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
 .. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
 .. |nbsp| unicode:: 0xA0 
    :trim:

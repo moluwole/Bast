@@ -8,11 +8,10 @@ BAST Framework
 .. csv-table:: 
     :widths: auto
     
-    .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
-    
-    .. image:: https://img.shields.io/badge/python-3.4+-blue.svg
-    
-    .. image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg :target: https://circleci.com/gh/moluwole/Bast
+    - .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
+    - .. image:: https://img.shields.io/badge/python-3.4+-blue.svg
+    - .. image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg 
+        :target: https://circleci.com/gh/moluwole/Bast
 
  
 About Bast

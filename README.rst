@@ -39,6 +39,17 @@ Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You 
     route = Route()
     route.get(url='/', controller_name=Mine, method_name='index')
     route.post(url='/error', controller_name=Mine, method_name='error')
+    
+Bast Controllers are Python Classes which inherit from the Bast Controller Class. Using ``panther create:controller ControllerName`` creates a controller file in the controller package. To render template in controller, use ``self.view('template.html', args=None)`` where the args is a Dictionary object and optional
+
+.. code:: python
+
+    from bast import Controller
+
+
+    class TestController(Controller):
+        def index(self):
+            self.view('index.html')
 
 To run your app use
 
@@ -65,7 +76,11 @@ This Framework is Licensed under MIT License
 
 Credits
 ~~~~~~~~~
-Bast runs on the `Tornado Web Framework`_. For templating, it makes use of the `Jinja Templating`_ Engine. Eloquent Object Relation Mapping is achieved using `Orator ORM`_
+Bast runs on the `Tornado Web Framework`_. 
+
+For templating, it makes use of the `Jinja Templating`_ Engine. 
+
+Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 
 
 

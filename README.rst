@@ -74,7 +74,7 @@ This Framework is Licensed under MIT License
 .. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
-.. |status| image:: https://img.shields.io/pypi/status/Bast.svg 
+.. |status| image:: https://img.shields.io/pypi/status/Bast.svg
 .. |issues| image:: https://img.shields.io/github/issues-raw/moluwole/Bast.svg
 .. |contributors| image:: https://img.shields.io/github/contributors/moluwole/Bast.svg
 .. |coverall| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master

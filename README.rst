@@ -5,7 +5,7 @@ BAST Framework
     :width: 50
     :align: center
 
-.. list-table:: 
+.. csv-table:: 
     :widths: auto
     
     -.. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master

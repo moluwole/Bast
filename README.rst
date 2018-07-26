@@ -5,7 +5,7 @@ BAST Framework
     :width: 50
     :align: center
 
-|travis| |circleci| |python|
+|travis| |circleci| |python| |license|
 
  
 About Bast

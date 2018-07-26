@@ -71,7 +71,7 @@ This Framework is Licensed under MIT License
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
 .. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
-.. |license| image:: .. image:: https://img.shields.io/github/license/moluwole/bast.svg
+.. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |coverall| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master
     :target: https://coveralls.io/github/moluwole/Bast?branch=master
 

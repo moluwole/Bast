@@ -1,6 +1,6 @@
 BAST Framework
 ==============
-.. image:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
+.. figure:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
     :height: 100px
     :width: 100px
     :scale: 50%

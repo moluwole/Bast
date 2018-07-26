@@ -5,7 +5,7 @@ BAST Framework
     :width: 50
     :align: center
 
-.. list-table::
+.. csv-table::
     |travis| |circleci| |python| |license|
 
  

@@ -23,6 +23,12 @@ To install Bast, you can download it easily from Pypi using
 
     $ pip install Bast
     
+Bast comes bundled with a very powerful CLI tool called ``panther``. To show the available commands, use
+
+.. code:: bash
+    
+    $ panther --help
+    
 To create a setup a new project, use
 
 .. code:: bash
@@ -33,11 +39,6 @@ To create a setup a new project, use
     
 To visit the website and see if it's setup successfully, visit ``127.0.0.1:2000`` in your browser
 
-Bast comes bundled with a very powerful CLI tool called ``panther``. To show the available commands, use
-
-.. code:: bash
-    
-    $ panther --help
 
 Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET`` requests and ``route.post()`` for ``POST`` requests. Same goes for ``PUT`` and ``DELETE`` requests
 
@@ -86,9 +87,9 @@ This Framework is Licensed under MIT License
 
 Credits
 ~~~~~~~~~
-Bast runs on the `Tornado Web Framework`_. 
+Bast runs on the `Tornado HTTP Server`_. 
 
-For templating, it makes use of the `Jinja Templating`_ Engine. 
+For templating, Bast makes use of the `Jinja Templating`_ Engine. 
 
 Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 

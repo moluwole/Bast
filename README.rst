@@ -6,7 +6,8 @@ BAST Framework
     :align: center
 
 
-|travis| |circleci| |python| |license| |coverall|
+
+|travis| |circleci| |python| |license| |coverall| |pversion| |status| |issues| |contributors|
 
  
 About Bast
@@ -72,6 +73,10 @@ This Framework is Licensed under MIT License
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
 .. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
+.. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
+.. |status| image:: https://img.shields.io/pypi/status/Bast.svg 
+.. |issues| image:: https://img.shields.io/github/issues-raw/moluwole/Bast.svg
+.. |contributors| image:: https://img.shields.io/github/contributors/moluwole/Bast.svg
 .. |coverall| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master
     :target: https://coveralls.io/github/moluwole/Bast?branch=master
 

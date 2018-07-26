@@ -65,7 +65,8 @@ This Framework is Licensed under MIT License
 
 Credits
 ~~~~~~~~~
-Bast runs on the `Tornado Web Framework`
+Bast runs on the `Tornado Web Framework`_. For templating, it makes use of the `Jinja Templating`_ Engine. Eloquent Object Relation Mapping is achieved using `Orator ORM`_
+
 
 
 .. _file an issue: https://github.com/rtfd/readthedocs.org/issues

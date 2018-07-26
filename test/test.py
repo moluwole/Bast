@@ -61,5 +61,5 @@ class Test(unittest.TestCase):
 
         route.get('/index', "gdfg", 'test_route')
 
-        urls = route.show()
+        urls = route.all()
         self.assertTrue(isinstance(urls, list))

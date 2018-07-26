@@ -18,6 +18,7 @@ Bast is a Simple and Elegant Framework. The main aim of Bast is to create an enj
 Usage
 ~~~~~~~~~
 To install Bast, you can download it easily from Pypi using
+
 .. code:: bash
 
     $ pip install Bast

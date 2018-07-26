@@ -23,12 +23,13 @@ To install Bast, you can download it easily from Pypi using
 
     $ pip install Bast
 
-Bast comes bundled with a very powerful CLI tool called `panther`. To show the available commands, use
+Bast comes bundled with a very powerful CLI tool called ``panther``. To show the available commands, use
 
 .. code:: bash
     
     $ panther --help
 
+Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET``
 Sample Code
 ~~~~~~~~~~~~
 .. code:: python

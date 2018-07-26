@@ -12,16 +12,15 @@ BAST Framework
  
 About Bast
 ~~~~~~~~~~~~~
-A lightweight but easy to use framework
+Bast is a Simple and Elegant Framework. The main aim of Bast is to create an enjoyable and creative Experience for Developers. Bast attempts to take the pain out of development by making common tasks used in the majority of web projects easy. Bast is aimed to be platform Independent and it's core Language is Python. Uses Python 3.*
 
-    A Simple but Elegant MVC Framework
 
 Usage
 ~~~~~~~~~
+To install Bast, you can download it easily from Pypi using
 .. code:: bash
 
     $ pip install Bast
-    $ panther
 
 
 Sample Code

@@ -23,6 +23,11 @@ To install Bast, you can download it easily from Pypi using
 
     $ pip install Bast
 
+Bast comes bundled with a very powerful CLI tool called `panther`. To show the available commands, use
+
+.. code:: bash
+    
+    $ panther --help
 
 Sample Code
 ~~~~~~~~~~~~

@@ -5,6 +5,7 @@ BAST Framework
     :height: 10px
 
 .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
+.. image:: https://img.shields.io/badge/python-3.4+-blue.svg
 
  
 About Bast

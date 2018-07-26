@@ -4,9 +4,7 @@ BAST Framework
     :width: 10px
     :height: 10px
 
-.. image:: https://img.shields.io/travis/moluwole/Bast.svg
-    :alt: Travis (.org)   
-    :target: https://github.com/moluwole/Bast
+.. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 
  
 About Bast

@@ -29,9 +29,8 @@ Bast comes bundled with a very powerful CLI tool called ``panther``. To show the
     
     $ panther --help
 
-Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET``
-Sample Code
-~~~~~~~~~~~~
+Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET`` requests and ``route.post()`` for ``POST`` requests. Same goes for ``PUT`` and ``DELETE`` requests
+
 .. code:: python
 
     from bast import Route
@@ -39,7 +38,7 @@ Sample Code
 
     route = Route()
     route.get(url='/', controller_name=Mine, method_name='index')
-    route.get(url='/error', controller_name=Mine, method_name='error')
+    route.post(url='/error', controller_name=Mine, method_name='error')
 
 
 .. code:: python

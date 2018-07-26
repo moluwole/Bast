@@ -5,8 +5,7 @@ BAST Framework
     :width: 50
     :align: center
 
-.. csv-table::
-    |travis| |circleci| |python| |license|
+|travis| |circleci| |python| |license|
 
  
 About Bast
@@ -69,6 +68,7 @@ This Framework is Licensed under MIT License
 .. _Jinja Templating: https://jinja.pocoo.org/docs/2.10
 .. _Orator ORM: https://orator-orm.com
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
+    :align: center
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
 .. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
 .. |license| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master

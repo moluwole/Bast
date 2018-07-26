@@ -15,6 +15,9 @@ class Route:
     def __init__(self):
         self.url = []
 
+    # def get_param(self, url):
+    #     urls_split = url.split('/')
+
     def get(self, url, controller_name, method_name):
         """
         Adds URL to the url list for GET request
@@ -55,7 +58,7 @@ class Route:
         """
         self.url.append((url, controller_name, dict(method=method_name)))
 
-    def show(self):
+    def all(self):
         """
         Returns the list of URL. Used by Server to get the list of URLS
         :return:

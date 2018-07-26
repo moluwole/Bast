@@ -97,6 +97,7 @@ class Controller(RequestHandler, TemplateRendering):
         self.set_header('Content-type', 'application/json')
 
     def get(self, *args, **kwargs):
+        # print('Args: ' + str(args))
         try:
             func = getattr(self, self.method)
             if func:

@@ -20,8 +20,7 @@ from tornado.web import Application, StaticFileHandler
 
 __author__ = "Majiyagbe Oluwole"
 __copyright__ = ""
-__credits__ = ["Majiyagbe Oluwole", "Azeez Abiodun Solomon"]
-__license__ = "Apache 2.0"
+__license__ = "M.I.T License"
 __version__ = "1.0"
 __status__ = "Under Development"
 
@@ -45,7 +44,7 @@ class Bast(Application):
 
         self.load_config()
 
-        self.handler = route.show()
+        self.handler = route.all()
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
         self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
         self.handler.append(
@@ -94,6 +93,7 @@ class Bast(Application):
         os.environ['DB_USER'] = config['CONFIG']['DB_USER']
         os.environ['DB_PASSWORD'] = config['CONFIG']['DB_PASSWORD']
         os.environ['DB_PREFIX'] = config['CONFIG']['DB_PREFIX']
+
         self.host = config['CONFIG']['HOST']
         self.port = config['CONFIG']['PORT']
         self.debug = config['CONFIG']['DEBUG']

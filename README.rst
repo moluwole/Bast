@@ -1,8 +1,8 @@
 BAST Framework
 ==============
 .. image:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
-    :width: 10px
-    :height: 10px
+    :height: 100px
+    :width: 100px
     :scale: 50%
     :align: center
 

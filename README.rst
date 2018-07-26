@@ -3,7 +3,6 @@ BAST Framework
 .. figure:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
     :height: 100px
     :width: 100px
-    :scale: 50%
     :align: center
 
 .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master

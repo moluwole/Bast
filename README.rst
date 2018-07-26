@@ -3,6 +3,8 @@ BAST Framework
 .. image:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
     :width: 10px
     :height: 10px
+    :scale: 50%
+    :align: center
 
 .. image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 .. image:: https://img.shields.io/badge/python-3.4+-blue.svg

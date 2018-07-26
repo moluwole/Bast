@@ -40,15 +40,11 @@ Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You 
     route.get(url='/', controller_name=Mine, method_name='index')
     route.post(url='/error', controller_name=Mine, method_name='error')
 
+To run your app use
 
-.. code:: python
+.. code:: bash
 
-    from route.link import route
-    from bast import Bast
-
-    if __name__ == '__main__':
-        app = Bast(route)
-        app.run(debug=True)
+    $ panther run
         
 Maintainer
 ~~~~~~~~~~~~~~~~

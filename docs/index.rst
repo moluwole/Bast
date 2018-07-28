@@ -7,7 +7,7 @@ BAST Framework
 
 
 
-|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors|
+|travis| |circleci| |python| |license| |status| |issues| |contributors|
 
 
 About Bast

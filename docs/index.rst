@@ -7,7 +7,7 @@ BAST Framework
 
 
 
-|travis| |circleci| |python| |license| |coverall| |pversion| |status| |issues| |contributors|
+|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors|
 
 
 About Bast
@@ -98,12 +98,12 @@ Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 .. _file an issue: https://github.com/rtfd/readthedocs.org/issues
 .. _Read the Docs README: https://github.com/rtfd/readthedocs.org/blob/master/README.rst
 .. _project page: https://readthedocs.org/projects/pip/
-.. _Tornado Web Framework: https://tornadoweb.org
+.. _Tornado HTTP Server: https://tornadoweb.org
 .. _Jinja Templating: https://jinja.pocoo.org/docs/2.10
 .. _Orator ORM: https://orator-orm.com
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
-.. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
+.. |python| image:: https://img.shields.io/badge/python-3.0+-blue.svg
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
 .. |status| image:: https://img.shields.io/pypi/status/Bast.svg

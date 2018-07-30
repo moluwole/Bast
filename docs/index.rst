@@ -1,13 +1,13 @@
 BAST Framework
 ==============
-.. figure:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
+.. image:: https://raw.githubusercontent.com/MOluwole/Bast/master/bast/image/bast.png
     :height: 50
     :width: 50
     :align: center
 
 
 
-|travis| |circleci| |python| |license| |status| |issues| |contributors|
+|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors|
 
 
 About Bast
@@ -39,17 +39,17 @@ To create a setup a new project, use
 
 To visit the website and see if it's setup successfully, visit ``127.0.0.1:2000`` in your browser
 
-
-Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET`` requests and ``route.post()`` for ``POST`` requests. Same goes for ``PUT`` and ``DELETE`` requests
+Update
+~~~~~~~~~
+Bast Routing is now relatively simple and much more easy to use. It embodies the way and manner Laravel defines it's URL's but instead of the ``@`` symbol, Bast makes use of the ``.``
+You do not need to import your controller again
 
 .. code:: python
 
     from bast import Route
-    from example.controller.test_controller import Mine
 
     route = Route()
-    route.get(url='/', controller_name=Mine, method_name='index')
-    route.post(url='/error', controller_name=Mine, method_name='error')
+    route.get(url='/', controller='ExampleController.index')
 
 Bast Controllers are Python Classes which inherit from the Bast Controller Class. Using ``panther create:controller ControllerName`` creates a controller file in the controller package. To render template in controller, use ``self.view('template.html', args=None)`` where the args is a Dictionary object and optional
 

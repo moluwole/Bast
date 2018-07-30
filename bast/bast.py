@@ -94,6 +94,7 @@ class Bast(Application):
         os.environ['DB_USER'] = config['DATABASE']['DB_USER']
         os.environ['DB_PASSWORD'] = config['DATABASE']['DB_PASSWORD']
         os.environ['DB_PREFIX'] = config['DATABASE']['DB_PREFIX']
+        os.environ['ABS_PATH'] = os.path.abspath('.')
 
         self.host = config['CONFIG']['HOST']
         self.port = config['CONFIG']['PORT']

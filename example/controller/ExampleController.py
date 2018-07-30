@@ -1,8 +1,9 @@
-from bast.controller import Controller
 import os
 
+from bast.controller import Controller
 
-class Mine(Controller):
+
+class ExampleController(Controller):
     def index(self):
         self.view('index.html', {'data': os.environ['DB_NAME']})
 

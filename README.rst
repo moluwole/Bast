@@ -14,6 +14,10 @@ About Bast
 ~~~~~~~~~~~~~
 Bast is a Simple and Elegant Framework. The main aim of Bast is to create an enjoyable and creative Experience for Developers. Bast attempts to take the pain out of development by making common tasks used in the majority of web projects easy. Bast is aimed to be platform Independent and it's core Language is Python. Uses Python 3.*
 
+Python Version
+~~~~~~~~~~~~~~~~~
+Bast makes use of Python 3.0 and above in order to run
+
 
 Usage
 ~~~~~~~~~

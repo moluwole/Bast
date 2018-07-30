@@ -44,7 +44,7 @@ class Bast(Application):
 
         self.load_config()
 
-        self.handler = route.all()
+        self.handler = route.all().url
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
         self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
         self.handler.append(

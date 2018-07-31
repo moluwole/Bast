@@ -38,6 +38,4 @@ You can then create any method and use the methods inherent in the controller cl
 .. automethod:: bast.controller.Controller.get_argument
 .. automethod:: bast.controller.Controller.get_arguments
 .. automethod:: bast.controller.Controller.get_header
-.. automethod:: bast.controller.Controller.get_body_argument
-.. automethod:: bast.controller.Controller.get_body_arguments
 .. automethod:: bast.controller.Controller.request

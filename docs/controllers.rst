@@ -25,9 +25,10 @@ You can then create any method and use the methods inherent in the controller cl
 
 .. autoclass:: bast.controller.Controller
 
-.. automodule:: bast.controller.Controller
-
 .. automodule:: Controller.write_error
+
 .. automodule:: Controller.view
+
 .. automodule:: Controller.only
+
 .. automodule:: Controller.except_

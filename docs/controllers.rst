@@ -2,7 +2,8 @@ Controllers
 ============
 
 .. testsetup::
-from bast import Controller
+
+    from bast import Controller
 
 .. automodule:: bast.controller
 

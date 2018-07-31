@@ -26,9 +26,11 @@ You can then create any method and use the methods inherent in the controller cl
 .. autoclass:: bast.controller.Controller
 
 .. automethod:: bast.controller.Controller.write_error
-
 .. automethod:: bast.controller.Controller.view
-
-.. automethod:: Controller.only
-
-.. automethod:: Controller.except_
+.. automethod:: bast.controller.Controller.only
+.. automethod:: bast.controller.Controller.except_
+.. automethod:: bast.controller.Controller.json
+.. automethod:: bast.controller.Controller.get
+.. automethod:: bast.controller.Controller.post
+.. automethod:: bast.controller.Controller.put
+.. automethod:: bast.controller.Controller.delete

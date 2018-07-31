@@ -17,18 +17,12 @@ from .view import TemplateRendering
 
 
 class Controller(RequestHandler, TemplateRendering):
-    # def __init__(self, application, request, **kwargs):
-    #     self.request = request
-    #     super().__init__(application, request, **kwargs)
     method = None
     middleware = None
 
     def write_error(self, status_code, **kwargs):
         """
-        Handle Exceptions from the server
-        :param status_code:
-        :param kwargs:
-        :return:
+        Handle Exceptions from the server. Formats the HTML into readable form
         """
         reason = self._reason
         if self.settings.get("serve_traceback") and "exc_info" in kwargs:
@@ -41,8 +35,17 @@ class Controller(RequestHandler, TemplateRendering):
 
     def view(self, template_name, kwargs=None):
         """
-        This is for making some extra context variables available to
-        the template
+        Used to render template to view
+
+        Sample usage
+        +++++++++++++
+        .. code:: python
+
+            from bast import Controller
+
+            class MyController(Controller):
+                def index(self):
+                    self.view('index.html')
         """
         if kwargs is None:
             kwargs = dict()
@@ -61,15 +64,15 @@ class Controller(RequestHandler, TemplateRendering):
     def data_received(self, chunk):
         pass
 
-    # def initialize(self, method):
-    #     self.method = method
-
     def __run_middleware__(self, middleware_list):
+        """
+        Gets the middleware attached to the route and executes it before the route is called. Middlewares in Bast are run before the
+        Controller Logic is executed. Returns true once it has been run successfully
+        """
         middleware_location = 'middleware'
         return_value = False
         try:
             for func in middleware_list:
-                # print(func)
                 middleware_func = importlib.import_module('{0}.'.format(middleware_location) + func)
                 if hasattr(middleware_func, func):
                     class_name = getattr(middleware_func, func)
@@ -82,18 +85,33 @@ class Controller(RequestHandler, TemplateRendering):
         return return_value
 
     def initialize(self, method, middleware):
+        """
+        Overriden initialize method from Tornado. Assigns the controller method and middleware attached to the route being executed
+        to global variables to be used
+        """
         self.method = method
         self.middleware = middleware
 
     def only(self, arguments):
         """
         returns the key, value pair of the arguments passed as a dict object
-        Example usage
-        data = self.only(['arg_name'])
-        :param arguments:
-        :return:
+
+        Sample Usage
+        ++++++++++++++
+        .. code:: python
+
+            from bast import Controller
+
+            class MyController(Controller):
+                def index(self):
+                    data = self.only(['username'])
+
+        Returns only the argument username and assigns it to the data variable.
         """
         data = {}
+        if not isinstance(arguments, list):
+            arguments = list(arguments)
+
         for i in arguments:
             data[i] = self.get_argument(i)
         return data
@@ -102,11 +120,22 @@ class Controller(RequestHandler, TemplateRendering):
         """
         returns the arguments passed to the route except that set by user
 
-        Example usage
-        data = self.except_(['arg_name'])
-        :param arguments:
-        :return:
+        Sample Usage
+        ++++++++++++++
+        .. code:: python
+
+            from bast import Controller
+
+            class MyController(Controller):
+                def index(self):
+                    data = self.except_(['arg_name'])
+
+        Returns a dictionary of all arguments except for that provided by as ``arg_name``
         """
+
+        if not isinstance(arguments, list):
+            arguments = list(arguments)
+
         args = self.request.arguments
         data = {}
         for key, value in args.items():
@@ -117,8 +146,6 @@ class Controller(RequestHandler, TemplateRendering):
     def json(self, data):
         """
         Encodes the dictionary being passed to JSON and sets the Header to application/json
-        :param data:
-        :return:
         """
         self.write(json_.encode(data))
         self.set_header('Content-type', 'application/json')

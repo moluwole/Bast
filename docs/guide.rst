@@ -3,6 +3,7 @@ User Guide
 
 .. toctree::
 
+    index
     intro
     installation
     controllers

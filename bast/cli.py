@@ -70,6 +70,26 @@ def controller_creatr(filename):
     click.echo("\033[1;32;40m Modes/Controller " + filename + " created successfully")
 
 
+@main.command('create:middleware', short_help="Creates a Middleware")
+@click.argument('filename', required=1)
+def middleware_creatr(filename):
+    bast_app = os.path.abspath('.') + '/config/config.ini'
+    if not os.path.exists(bast_app):
+        click.echo('ERROR: Ensure you are in a bast app to run the create:middleware command')
+        return
+
+    path = os.path.abspath('.') + '/middleware'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    file_name = str(filename) + '.py'
+    middleware_file = open(os.path.abspath('.') + '/middleware/' + file_name, 'w+')
+    compose = "class " + filename + ":\n    def handle(self, request):\n    return True"
+    middleware_file.write(compose)
+    middleware_file.close()
+    click.echo("\033[1;32;40m Modes/Middleware " + filename + " created successfully")
+
+
 @main.command('create:view', short_help="Create a View File")
 @click.argument('filename', required=1)
 def view_creatr(filename):

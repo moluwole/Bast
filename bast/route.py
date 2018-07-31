@@ -7,34 +7,29 @@
 import importlib
 
 
-class Route:
+class Route(object):
     """
     Route Class. Appends the URL, Controller Instance and Method to a list instance to be passed on to the server
     instance
 
     """
 
-    def __init__(self):
-        self.url = []
-        self.middleware_list = []
-        self.controller_location = 'controller'
-        self.middleware_location = 'middleware'
+    url_ = None
+    controller = None
+    method = None
+    controller_location = 'controller'
+    url = []
 
-    def middleware(self, *args):
-        self.middleware_list = args
+    def middleware(self, args):
+        """
+        Appends a Middleware Class Name to the URL
+        :param args:
+        :return: self
+        """
+        if self.url[(len(self.url) - 1)] == (self.url_, self.controller, dict(method=self.method, middleware=None)):
+            self.url.pop()
+        self.url.append((self.url_, self.controller, dict(method=self.method, middleware=args)))
         return self
-
-    def __run_middleware__(self):
-        try:
-            for func in self.middleware_list:
-                middleware_func = importlib.import_module('{0}.'.format(self.middleware_location) + func)
-                if hasattr(middleware_func, func):
-                    class_name = getattr(middleware_func, func)
-                    handle = getattr(class_name, 'handle')
-                    return_value = handle(class_name)
-                    print(return_value)
-        except Exception as e:
-            print("There is an Error in your Middleware ", e)
 
     def __return_controller__(self, controller):
         if isinstance(controller, str):
@@ -52,7 +47,6 @@ class Route:
         get_controller = ctr[0].split('.')[-1]
         try:
             # Import the module
-            print('{0}.'.format(self.controller_location) + get_controller)
             if isinstance(controller, str):
                 controller_name = importlib.import_module('{0}.'.format(self.controller_location) + get_controller)
             else:
@@ -73,10 +67,13 @@ class Route:
         Adds URL to the url list for GET request
         :param url:
         :param controller:
-        :return:
+        :return: self
         """
         controller_class, controller_method = self.__return_controller__(controller)
-        self.url.append((url, controller_class, dict(method=controller_method)))
+        self.controller = controller_class
+        self.method = controller_method
+        self.url_ = url
+        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
         return self
 
     def post(self, url, controller):
@@ -87,7 +84,12 @@ class Route:
         :return:
         """
         controller_class, controller_method = self.__return_controller__(controller)
-        self.url.append((url, controller_class, dict(method=controller_method)))
+
+        self.controller = controller_class
+        self.method = controller_method
+        self.url_ = url
+
+        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
         return self
 
     def put(self, url, controller):
@@ -98,7 +100,12 @@ class Route:
         :return:
         """
         controller_class, controller_method = self.__return_controller__(controller)
-        self.url.append((url, controller_class, dict(method=controller_method)))
+
+        self.controller = controller_class
+        self.method = controller_method
+        self.url_ = url
+
+        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
         return self
 
     def delete(self, url, controller):
@@ -109,7 +116,12 @@ class Route:
         :return:
         """
         controller_class, controller_method = self.__return_controller__(controller)
-        self.url.append((url, controller_class, dict(method=controller_method)))
+
+        self.controller = controller_class
+        self.method = controller_method
+        self.url_ = url
+
+        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
         return self
 
     def all(self):
@@ -117,5 +129,4 @@ class Route:
         Returns the list of URL. Used by Server to get the list of URLS
         :return:
         """
-        self.__run_middleware__()
         return self

@@ -7,4 +7,5 @@
 from bast import Route
 
 route = Route()
-route.get(url='/', controller='ExampleController.index').middleware('Api')
+# route.middleware(['Api', 'Der']).get(url='/', controller='ExampleController.index')#.middleware(['Api'])
+route.get('/', 'ExampleController.index').middleware(['Api'])

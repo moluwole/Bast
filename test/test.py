@@ -54,11 +54,3 @@ class Test(unittest.TestCase):
         script_link = script("myscript.js")
         self.assertEqual('<script type="text/javascript" src="/script/myscript.js"></script>', script_link, "Not equal")
 
-    # def test_routes(self):
-    #     from bast.route import Route
-    #     route = Route()
-    #
-    #     route.get('/index', "Controller.index")
-    #
-    #     urls = route.all()
-    #     self.assertTrue(isinstance(urls, list))

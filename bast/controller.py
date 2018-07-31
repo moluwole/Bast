@@ -5,6 +5,7 @@
     For full copyright and license information, view the LICENSE distributed with the Source Code
 """
 
+import importlib
 import logging
 import traceback
 
@@ -16,6 +17,11 @@ from .view import TemplateRendering
 
 
 class Controller(RequestHandler, TemplateRendering):
+    # def __init__(self, application, request, **kwargs):
+    #     self.request = request
+    #     super().__init__(application, request, **kwargs)
+    method = None
+    middleware = None
 
     def write_error(self, status_code, **kwargs):
         """
@@ -55,8 +61,33 @@ class Controller(RequestHandler, TemplateRendering):
     def data_received(self, chunk):
         pass
 
-    def initialize(self, method):
+    # def initialize(self, method):
+    #     self.method = method
+
+    def __run_middleware__(self, middleware_list):
+        middleware_location = 'middleware'
+        return_value = False
+        try:
+            for func in middleware_list:
+                # print(func)
+                middleware_func = importlib.import_module('{0}.'.format(middleware_location) + func)
+                if hasattr(middleware_func, func):
+                    class_name = getattr(middleware_func, func)
+                    handle = getattr(class_name, 'handle')
+                    return_value = handle(class_name, self)
+                    return return_value
+        except Exception as e:
+            print("There is an Error in your Middleware ", e)
+
+        return return_value
+
+    def initialize(self, method, middleware):
         self.method = method
+        self.middleware = middleware
+
+    def argument(self, name):
+        self.get_arguments(name)
+
 
     def only(self, arguments):
         """
@@ -97,8 +128,11 @@ class Controller(RequestHandler, TemplateRendering):
         self.set_header('Content-type', 'application/json')
 
     def get(self, *args, **kwargs):
-        # print('Args: ' + str(args))
         try:
+            if self.middleware is not None and len(self.middleware) > 0:
+                value = self.__run_middleware__(self.middleware)
+                if not value:
+                    return
             func = getattr(self, self.method)
             if func:
                 func()

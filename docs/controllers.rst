@@ -23,7 +23,7 @@ This creates a MyController.py file in the controller directory. The skeleton fo
 
 You can then create any method and use the methods inherent in the controller class
 
-.. autoclass:: bast.controller.Controller
+.. autoclass:: Controller
 
 .. automodule:: Controller.write_error
 

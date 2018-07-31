@@ -20,11 +20,12 @@ class Route(object):
     controller_location = 'controller'
     url = []
 
+    # def prefix(self, pref):
+    #     return self
+
     def middleware(self, args):
         """
-        Appends a Middleware Class Name to the URL
-        :param args:
-        :return: self
+        Appends a Middleware to the route which is to be executed before the route runs
         """
         if self.url[(len(self.url) - 1)] == (self.url_, self.controller, dict(method=self.method, middleware=None)):
             self.url.pop()
@@ -64,24 +65,20 @@ class Route(object):
 
     def get(self, url, controller):
         """
-        Adds URL to the url list for GET request
-        :param url:
-        :param controller:
-        :return: self
+        Gets the Controller and adds the route, controller and method to the url list for GET request
         """
         controller_class, controller_method = self.__return_controller__(controller)
+
         self.controller = controller_class
         self.method = controller_method
         self.url_ = url
+
         self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
         return self
 
     def post(self, url, controller):
         """
-        Adds URL to the url for the POST request
-        :param url:
-        :param controller:
-        :return:
+        Gets the Controller and adds the route, controller and method to the url list for the POST request
         """
         controller_class, controller_method = self.__return_controller__(controller)
 
@@ -94,10 +91,7 @@ class Route(object):
 
     def put(self, url, controller):
         """
-        Adds URL to list for PUT request
-        :param url:
-        :param controller:
-        :return:
+        Gets the Controller and adds the route, controller and method to the url list for PUT request
         """
         controller_class, controller_method = self.__return_controller__(controller)
 
@@ -110,10 +104,7 @@ class Route(object):
 
     def delete(self, url, controller):
         """
-        Adds URL for the delete request
-        :param url:
-        :param controller:
-        :return:
+        Gets the Controller and adds the route, controller and method to the url list for the DELETE request
         """
         controller_class, controller_method = self.__return_controller__(controller)
 
@@ -126,7 +117,6 @@ class Route(object):
 
     def all(self):
         """
-        Returns the list of URL. Used by Server to get the list of URLS
-        :return:
+        Returns the list of URL. Used by Server to get the list of URLS. This is passed to the Bast HTTP Server
         """
         return self

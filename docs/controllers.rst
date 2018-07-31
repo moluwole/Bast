@@ -23,6 +23,9 @@ This creates a ``MyController.py`` file in the controller directory. The skeleto
 
 You can then create any method and use the methods inherent in the controller class
 
+Controller Methods and Functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. autoclass:: bast.controller.Controller
 
 .. automethod:: bast.controller.Controller.write_error

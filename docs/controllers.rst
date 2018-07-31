@@ -1,13 +1,14 @@
 Controllers
 ============
 
-.. testsetup::
+.. testsetup:: *
 
     from bast.controller import *
     from bast import *
     import bast
 
 .. automodule:: bast.controller
+.. autoclass:: Controller
 
 Controllers in Bast handle the logic of our app as stated in the MVC paradigm ``M - Model | V - View | C - Controller``. To create controllers in Bast
 

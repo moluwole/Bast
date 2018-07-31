@@ -4,6 +4,8 @@ Controllers
 .. testsetup::
 
     from bast.controller import *
+    from bast import *
+    import bast
 
 .. automodule:: bast.controller
 
@@ -25,7 +27,7 @@ This creates a MyController.py file in the controller directory. The skeleton fo
 
 You can then create any method and use the methods inherent in the controller class
 
-.. automodule:: bast.controller.Controller
+.. automodule:: Controller
     :members:
     :undoc-members:
     :show-inheritance:

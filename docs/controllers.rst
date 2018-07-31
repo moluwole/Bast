@@ -7,7 +7,7 @@ Controllers
 
 .. automodule:: Controller
 
-Controllers in Bast handle the logic of our app as stated in the MVC paradigm ``M - Model | V - View | C - Controller. To create controllers in Bast
+Controllers in Bast handle the logic of our app as stated in the MVC paradigm ``M - Model | V - View | C - Controller``. To create controllers in Bast
 
 .. code:: bash
 

@@ -25,6 +25,11 @@ This creates a MyController.py file in the controller directory. The skeleton fo
 
 You can then create any method and use the methods inherent in the controller class
 
+.. automodule:: bast.controller.Controller
+:members:
+        :undoc-members:
+        :show-inheritance:
+
 .. automodule:: Controller.write_error
 .. automodule:: Controller.view
 .. automodule:: Controller.only

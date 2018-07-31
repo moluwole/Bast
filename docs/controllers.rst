@@ -4,11 +4,6 @@ Controllers
 .. testsetup:: *
 
     from bast.controller import *
-    from bast import *
-    import bast
-
-.. automodule:: bast.controller
-.. autoclass:: Controller
 
 Controllers in Bast handle the logic of our app as stated in the MVC paradigm ``M - Model | V - View | C - Controller``. To create controllers in Bast
 
@@ -28,10 +23,9 @@ This creates a MyController.py file in the controller directory. The skeleton fo
 
 You can then create any method and use the methods inherent in the controller class
 
-.. automodule:: Controller
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. autoclass:: bast.controller.Controller
+
+.. automodule:: bast.controller.Controller
 
 .. automodule:: Controller.write_error
 .. automodule:: Controller.view

@@ -3,6 +3,7 @@ Routing
 Routing in Bast is very simple and efficient. It follows the routing convention of Laravel and Adonis. A simple example is shown below
 
 .. code:: python
+
     from bast import Route
 
     route = Route()

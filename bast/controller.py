@@ -10,6 +10,7 @@ import logging
 import traceback
 
 from tornado.web import RequestHandler
+from tornado.util import unicode_type
 
 from .exception import BastException
 from .json_ import Json as json_
@@ -19,6 +20,10 @@ from .view import TemplateRendering
 class Controller(RequestHandler, TemplateRendering):
     method = None
     middleware = None
+
+    def __init__(self, application, request, **kwargs):
+        super().__init__(application, request, **kwargs)
+        self.request = request
 
     def write_error(self, status_code, **kwargs):
         """
@@ -198,11 +203,47 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
-    # def validate(self, params):
-    #     for i in range(0, len(params)):
-    #         if self.get_argument(params[i]) is None:
-    #             return False
-    #     return True
+    def get_argument(self, name, default=None, strip=True):
+        """
+        Returns the value of the argument with the given name.
+
+        If default is not provided, returns ``None``
+
+        If the argument appears in the url more than once, we return the last value.
+
+        The returned value is always unicode
+        """
+        return self._get_argument(name, default, self.request.arguments, strip)
+
+    def headers(self):
+        """
+        Returns all headers associated with the request
+        """
+        return self.request.headers
+
+    def header(self, param):
+        """
+        Returns the header specified by the key provided
+        """
+        return self.request.headers.get(param)
+
+    def _get_argument(self, name, default, source, strip=True):
+        args = self._get_arguments(name, source, strip=strip)
+        if not args:
+            if default is None:
+                return default
+        return args[-1]
+
+    def _get_arguments(self, name, source, strip=True):
+        values = []
+        for v in source.get(name, []):
+            v = self.decode_argument(v, name=name)
+            if isinstance(v, unicode_type):
+                v = self._remove_control_chars_regex.sub(" ", v)
+            if strip:
+                v = v.strip()
+            values.append(v)
+        return values
 
 
 def html_error(code, message, _traceback=None):

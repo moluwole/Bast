@@ -68,6 +68,11 @@ To run your app use
 
     $ panther run
 
+Documentation
+~~~~~~~~~~~~~~~
+.. toctree::
+guide
+
 Maintainer
 ~~~~~~~~~~~~~~~~
 .. code:: bash

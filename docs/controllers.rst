@@ -25,4 +25,7 @@ This creates a MyController.py file in the controller directory. The skeleton fo
 
 You can then create any method and use the methods inherent in the controller class
 
-.. automodule:: Controller.write_error(self, status_code, **kwargs)
+.. automodule:: Controller.write_error
+.. automodule:: Controller.view
+.. automodule:: Controller.only
+.. automodule:: Controller.except_

@@ -85,10 +85,6 @@ class Controller(RequestHandler, TemplateRendering):
         self.method = method
         self.middleware = middleware
 
-    def argument(self, name):
-        self.get_arguments(name)
-
-
     def only(self, arguments):
         """
         returns the key, value pair of the arguments passed as a dict object

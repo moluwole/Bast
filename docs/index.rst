@@ -71,7 +71,8 @@ To run your app use
 Documentation
 ~~~~~~~~~~~~~~~
 .. toctree::
-guide
+
+    guide
 
 Maintainer
 ~~~~~~~~~~~~~~~~

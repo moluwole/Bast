@@ -49,7 +49,7 @@ class Models(Model):
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
 
         if db_name.lower() == 'mysql':
-            if 'pymysql' not in installed_packages:
+            if 'PyMySQL' not in installed_packages:
                 print('Installing required Database Driver')
                 os.system('pip install pymysql')
 

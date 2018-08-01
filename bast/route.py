@@ -38,12 +38,7 @@ class Route(object):
             if ctr[0].startswith('/'):
                 self.controller_location = '.'.join(ctr[0].replace('/', '').split('.')[0:-1])
         else:
-            if controller is None:
-                return None
-
-            name = controller.__qualname__
-            ctr = name.split('.')
-            self.controller_location = controller.__module__
+            raise Exception
 
         get_controller = ctr[0].split('.')[-1]
         try:

@@ -7,7 +7,7 @@ BAST Framework
 
 
 
-|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors|
+|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors| |downloads|
 
 
 About Bast
@@ -72,7 +72,13 @@ Documentation
 ~~~~~~~~~~~~~~~
 .. toctree::
 
-    guide
+    intro
+    installation
+    controllers
+    routing
+    templates
+    models
+    migration
 
 Maintainer
 ~~~~~~~~~~~~~~~~
@@ -113,6 +119,7 @@ Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
 .. |status| image:: https://img.shields.io/pypi/status/Bast.svg
+.. |downloads| image:: https://pepy.tech/badge/bast
 .. |issues| image:: https://img.shields.io/github/issues-raw/moluwole/Bast.svg
 .. |contributors| image:: https://img.shields.io/github/contributors/moluwole/Bast.svg
 .. |coverall| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master

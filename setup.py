@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='Bast',
-      version='0.0.1.0.7',
+      version='0.0.1.0.8',
       description='Simple yet Elegant Web Framework with MVC Patterns',
       long_description=readme(),
       classifiers=[

@@ -2,11 +2,13 @@ Models
 ======
 
 The power of Models are harnessed by Bast using Orator. To create Models, the ``panther`` CLI tool is used
+
 .. code:: bash
 
     $ panther create:model User
 
 The above code creates a model and migration file for the model.
+
 .. code:: python
 
     # Model File
@@ -18,6 +20,7 @@ The above code creates a model and migration file for the model.
 You can change the table the Model maps to by changing the ``__table__`` variable to the table name
 
 To create only a model file without a migration file, use
+
 .. code:: bash
 
     $ panther create:model User --migration=False

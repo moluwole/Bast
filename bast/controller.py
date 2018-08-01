@@ -23,7 +23,8 @@ class Controller(RequestHandler, TemplateRendering):
 
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
-        self.request = request
+        self.request        = request
+        self.application    = application
 
     def write_error(self, status_code, **kwargs):
         """

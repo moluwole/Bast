@@ -39,6 +39,7 @@ To create a setup a new project, use
     
     $ panther new project_name
     $ cd project
+    $ panther install
     $ panther run
     
 To visit the website and see if it's setup successfully, visit ``127.0.0.1:2000`` in your browser

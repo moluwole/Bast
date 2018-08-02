@@ -1,6 +1,6 @@
 Contributing to Bast
 =======================
-:bow: **First of all, Thanks for deciding to contribute to Bast. With People like you, Open Source would forever be Open** :smiley: :tada:
+**First of all, Thanks for deciding to contribute to Bast. With People like you, Open Source would forever be Open** :bow:  :smiley: :tada:
 
 The following is a set of guidelines for contributing to Bast. Feel free to propose changes to this document in a pull request
 
@@ -53,17 +53,17 @@ Git Commit Messages
 - Limit the first line to 72 characters or less
 - Reference issues and pull requests liberally after the first line
 - Consider starting the commit message with an applicable emoji:
-    - :art: when improving the format/structure of the code
-    - :racehorse: when improving performance
-    - :non-potable_water: when plugging memory leaks
-    - :memo: when writing docs
-    - :penguin: when fixing something on Linux
-    - :apple: when fixing something on macOS
-    - :checkered_flag: when fixing something on Windows
-    - :bug: when fixing a bug
-    - :fire: when removing code or files
-    - :green_heart: when fixing the CI build
-    - :white_check_mark: when adding tests
-    - :lock: when dealing with security
-    - :arrow_up: when upgrading dependencies
-    - :arrow_down: when downgrading dependencies
+    - 🎨  when improving the format/structure of the code
+    - 🐎  when improving performance
+    - 🚱  when plugging memory leaks
+    - 📝  when writing docs
+    - 🐧  when fixing something on Linux
+    - 🍎  when fixing something on macOS
+    - 🏁  when fixing something on Windows
+    - 🐛  when fixing a bug
+    - 🔥  when removing code or files
+    - 💚  when fixing the CI build
+    - ✅  when adding tests
+    - 🔒  when dealing with security
+    - ⬆️  when upgrading dependencies
+    - ⬇️  when downgrading dependencies

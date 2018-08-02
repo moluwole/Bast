@@ -1,6 +1,6 @@
 Contributing to Bast
 =======================
-:bow: **First of all, Thanks for deciding to contribute to Bast. With People like you, Open Source would forever be Open**   :smiley: :tada:
+:bow: **First of all, Thanks for deciding to contribute to Bast. With People like you, Open Source would forever be Open** :smiley: :tada:
 
 The following is a set of guidelines for contributing to Bast. Feel free to propose changes to this document in a pull request
 
@@ -33,7 +33,7 @@ including what the feature/enhancement would achieve.
 **Before Submitting a request for an enhancement**
     - Check to make sure that there is no feature similar to that which you have. Go through the ``classes``, ``functions`` and ``methods``.
 
-Please note that New features and Enhancements not on the `RoadMap<https://github.com/moluwole/Bast/blob/master/RoadMap.rst>`_ are tracked as Github Issues.
+Please note that New features and Enhancements not on the `RoadMap <https://github.com/moluwole/Bast/blob/master/RoadMap.rst>`_ are tracked as Github Issues.
 
 **To submit a good suggestion**
     - Use a **clear and descriptive title** for the issue to identify the suggestion
@@ -53,17 +53,17 @@ Git Commit Messages
 - Limit the first line to 72 characters or less
 - Reference issues and pull requests liberally after the first line
 - Consider starting the commit message with an applicable emoji:
-    - 🎨 :art: when improving the format/structure of the code
-    - 🐎 :racehorse: when improving performance
-    - 🚱 :non-potable_water: when plugging memory leaks
-    - 📝 :memo: when writing docs
-    - 🐧 :penguin: when fixing something on Linux
-    - 🍎 :apple: when fixing something on macOS
-    - 🏁 :checkered_flag: when fixing something on Windows
-    - 🐛 :bug: when fixing a bug
-    - 🔥 :fire: when removing code or files
-    - 💚 :green_heart: when fixing the CI build
-    - ✅ :white_check_mark: when adding tests
-    - 🔒 :lock: when dealing with security
-    - ⬆️ :arrow_up: when upgrading dependencies
-    - ⬇️ :arrow_down: when downgrading dependencies
+    - :art: when improving the format/structure of the code
+    - :racehorse: when improving performance
+    - :non-potable_water: when plugging memory leaks
+    - :memo: when writing docs
+    - :penguin: when fixing something on Linux
+    - :apple: when fixing something on macOS
+    - :checkered_flag: when fixing something on Windows
+    - :bug: when fixing a bug
+    - :fire: when removing code or files
+    - :green_heart: when fixing the CI build
+    - :white_check_mark: when adding tests
+    - :lock: when dealing with security
+    - :arrow_up: when upgrading dependencies
+    - :arrow_down: when downgrading dependencies

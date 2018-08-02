@@ -108,7 +108,7 @@ Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 .. _Orator ORM: https://orator-orm.com
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
-.. |python| image:: https://img.shields.io/badge/python-3.0+-blue.svg
+.. |python| image:: https://img.shields.io/badge/python-3.4+-blue.svg
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
 .. |status| image:: https://img.shields.io/pypi/status/Bast.svg

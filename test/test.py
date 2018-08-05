@@ -17,8 +17,11 @@ class Test(unittest.TestCase):
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.dirname(__file__), 'public/templates')
         os.environ['STATIC_FILES'] = os.path.join(os.path.dirname(__file__), 'public/static')
 
+
+
     def tearDown(self):
         os.environ.clear()
+
 
     def test_hash(self):
         from bast.hash import Hash
@@ -53,4 +56,18 @@ class Test(unittest.TestCase):
         from bast.view import script
         script_link = script("myscript.js")
         self.assertEqual('<script type="text/javascript" src="/script/myscript.js"></script>', script_link, "Not equal")
+    def test_session_Memory(self):
+        from bast import session
+        sss=session.MemorySession()
+        sss.put('name','hamzat ibrahim')
+        t="hamzat ibrahim"
+        self.assertEqual(sss.get('name'),t)
+
+    def test_session_Memory(self):
+        from bast import session
+        sss = session.FileSession()
+        sss.put('name', 'hamzat ibrahim')
+        t = "hamzat ibrahim"
+        self.assertEqual(sss.get('name'),t,True)
+
 

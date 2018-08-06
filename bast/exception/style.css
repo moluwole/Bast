@@ -1,0 +1,65 @@
+body {
+    margin: 0px auto;
+    padding: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.h-text {
+    color: #993300;
+}
+
+.container {
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    background: #F8F6F8;
+}
+
+.image {
+    width: 100px;
+    max-width: 100%;
+    opacity: 0.6;
+}
+
+hr {
+    border-width: 1px;
+    border-color: #991100;
+}
+
+.show-more{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.show-more a {
+    color: #993300;
+}
+
+.panel-error {
+    background: #DDD;
+    padding: 10px;
+    color: #666;
+}
+
+.panel-error-editor {
+    background: #DDD;
+    padding: 10px;
+    color: #666;
+}
+
+.error-show {
+    color: #666;
+}
+
+.class {
+    color: blue;
+    font-weight: bold;
+}
+
+.method {
+    color: #666;
+}
+
+.variable {
+    color: #111;
+}

@@ -46,11 +46,10 @@ class Test(unittest.TestCase):
 
     def test_css_local(self):
         from bast.view import css
-        css_link = css('mycssfile.css')
-        self.assertEqual('<link rel="stylesheet" href="/css/mycssfile.css">', css_link)
+        css_link = css('my_css_file.css')
+        self.assertEqual('<link rel="stylesheet" href="/css/my_css_file.css">', css_link)
 
     def test_script_local(self):
         from bast.view import script
-        script_link = script("myscript.js")
-        self.assertEqual('<script type="text/javascript" src="/script/myscript.js"></script>', script_link, "Not equal")
-
+        script_link = script("my_script.js")
+        self.assertEqual('<script type="text/javascript" src="/script/my_script.js"></script>', script_link, "Not equal")

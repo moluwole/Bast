@@ -66,3 +66,15 @@ class TemplateRendering:
             raise TemplateNotFound(template_name)
         content = template.render(**kwargs)
         return content
+
+    @classmethod
+    def render_exception(cls, **kwargs):
+        template_dir = os.path.dirname(os.path.realpath(__file__)) + "/exception"
+        env = Environment(loader=FileSystemLoader(template_dir))
+
+        try:
+            template = env.get_template('exception.html')
+        except TemplateNotFound:
+            raise TemplateNotFound('exception.html')
+        content = template.render(**kwargs)
+        return content

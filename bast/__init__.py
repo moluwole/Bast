@@ -13,5 +13,7 @@ from .migration import Migration
 from .model import Models
 from .route import Route
 
+from .validator import *
+
 __version__ = "1.0"
 

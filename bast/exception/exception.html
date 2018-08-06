@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arrrgghh!! :: Exception </title>
+    <link rel="stylesheet" href="exp/style.css">
+    <script>
+        function show_more(e) {
+            e.preventDefault()
+            const el = document.querySelector('.panel-error-editor')
+            if( el.style.display == 'none') {
+                el.style.display = 'block'
+            } else {
+                el.style.display = 'none'
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+            <img src="exp/bast-logo.jpeg" border="0" class="image">
+        <h1 class="h-text">{{ code }} {{ message }} </h1>
+        <hr>
+        <p class="error-show">
+            An Error Occurred during execution
+        </p>
+
+        {% if _traceback is not defined %}
+            </div></body>
+        {% else %}
+
+        <div class="panel-error">
+            {% for line in _traceback %}
+                <p>{{ line }}</p>
+            {% endfor %}
+        </div>
+        <!--<div class="show-more">-->
+            <!--<a href="#" id="show-more" onclick="show_more(event)">show more stack trace</a>-->
+        <!--</div>-->
+        <!--<div class="panel-error-editor">-->
+            <!--<span class="class">class</span> <span class="method">User:</span>-->
+            <!--<p></p>-->
+            <!--&nbsp;&nbsp;<span class="method">def</span> <span class="variable">__init__</span>:-->
+        <!--</div>-->
+    </div>
+</body>
+    {% endif %}
+</html>

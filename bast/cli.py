@@ -211,29 +211,6 @@ def migration_reset(pretend):
     click.echo('Migration Reset successful. %s migrations has been reset' % count)
 
 
-@main.command('install', short_help="Load config files into environ")
-def install():
-    bast_app = os.path.abspath('.') + '/config/config.ini'
-    if not os.path.exists(bast_app):
-        click.echo('ERROR: Ensure you are in a bast app to run the create:model command')
-        return
-
-    config = ConfigParser()
-    config.read(bast_app)
-
-    #   config section
-    os.environ['APP_NAME'] = config['CONFIG']['APP_NAME']
-    os.environ['APP_KEY'] = config['CONFIG']['APP_KEY']
-
-    os.environ['DB_TYPE'] = config['DATABASE']['DB_TYPE']
-    os.environ['DB_NAME'] = config['DATABASE']['DB_NAME']
-    os.environ['DB_HOST'] = config['DATABASE']['DB_HOST']
-    os.environ['DB_USER'] = config['DATABASE']['DB_USER']
-    os.environ['DB_PASSWORD'] = config['DATABASE']['DB_PASSWORD']
-    os.environ['DB_PREFIX'] = config['DATABASE']['DB_PREFIX']
-    os.environ['ABS_PATH'] = os.path.abspath('.')
-
-
 @main.command('create:model', short_help="Create Model File")
 @click.argument('model_file', required=1)
 @click.option('--migration', default=True, help="Generate Migration File Also")
@@ -253,7 +230,6 @@ def model_creatr(model_file, migration):
     file_open = open(path, 'w+')
     compose = 'from bast import Models\n\nclass %s(Models):\n    __table__ = \'%s\'' \
               % (model_file, snake_case(model_file))
-    # compose = 'from bast import Models\n\n\nclass %s(Models):\n    pass' % model_file
     file_open.write(compose)
     file_open.close()
     if migration:

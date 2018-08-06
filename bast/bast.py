@@ -37,6 +37,7 @@ class Bast(Application):
         Appropriate configurations are loaded from the config file into the os environment for use
         :param route:
         """
+        # self.settings = settings
         super().__init__(**settings)
         self.host = '127.0.0.1'
         self.port = 2000
@@ -50,13 +51,15 @@ class Bast(Application):
         self.handler.append(
             (r'/images/(.*)', StaticFileHandler, {"path": os.path.abspath('.') + "/public/static/images"}))
 
+        # append the URL for static files to exception
+        self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
+
     def run(self):
         """
         Function to Run the server. Server runs on host: 127.0.0.1 and port: 2000 by default. Debug is also set to false
         by default
 
         Can be overriden by using the config.ini file
-        :return:
         """
         define("port", default=self.port, help="Run on given port", type=int)
         define("host", default=self.host, help="Run on given host", type=str)
@@ -75,7 +78,6 @@ class Bast(Application):
     def load_config(self):
         """
         Function to load configuration details from the config.ini file into environment variables.
-        :return:
         """
         config_path = os.path.abspath('.') + "/config/config.ini"
         if not os.path.exists(config_path):

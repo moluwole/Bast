@@ -54,6 +54,7 @@ class Bast(Application):
         # append the URL for static files to exception
         self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
 
+    @property
     def run(self):
         """
         Function to Run the server. Server runs on host: 127.0.0.1 and port: 2000 by default. Debug is also set to false

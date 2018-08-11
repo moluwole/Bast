@@ -46,11 +46,21 @@ def image(image_file, alt_name="image"):
         return '<img src="' + image_file + '" alt="' + alt_name + '">'
     return '<img src="/images/' + image_file + '" alt="' + alt_name + '">'
 
+# def session():
+#     return
+
 
 class TemplateRendering:
     """
     Base class to load the template directory from the OS Environment TEMPLATE_FOLDER variable
     """
+
+    def __init__(self):
+        self.dictionary = {}
+
+    def add_(self, key, _dict_):
+        self.dictionary[key] = _dict_
+        return self
 
     def render_template(self, template_name, **kwargs):
         template_dir = os.environ['TEMPLATE_FOLDER']
@@ -60,11 +70,13 @@ class TemplateRendering:
         env.globals['css'] = css
         env.globals['script'] = script
 
+        self.dictionary.update(**kwargs)
+
         try:
             template = env.get_template(template_name)
         except TemplateNotFound:
             raise TemplateNotFound(template_name)
-        content = template.render(**kwargs)
+        content = template.render(self.dictionary)
         return content
 
     @classmethod

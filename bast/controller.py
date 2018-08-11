@@ -11,11 +11,11 @@ import traceback
 
 from tornado.web import RequestHandler
 from tornado.util import unicode_type
-from tornado.template import Loader
 
 from .exception import BastException
 from .json_ import Json as json_
 from .view import TemplateRendering
+from .session import MemorySession, FileSession
 
 import os
 
@@ -28,6 +28,8 @@ class Controller(RequestHandler, TemplateRendering):
         super().__init__(application, request, **kwargs)
         self.request        = request
         self.application    = application
+        self.session_driver = "file"
+        self.session        = MemorySession(self.request.remote_ip)
 
     # def
 
@@ -64,13 +66,20 @@ class Controller(RequestHandler, TemplateRendering):
         if kwargs is None:
             kwargs = dict()
 
-        kwargs.update({
-            'settings': self.settings,
-            'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
-            'request': self.request,
-            'xsrf_token': self.xsrf_token,
-            'xsrf_form_html': self.xsrf_form_html,
-        })
+        # kwargs.update({
+        #     'settings': self.settings,
+        #     'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
+        #     'request': self.request,
+        #     'xsrf_token': self.xsrf_token,
+        #     'xsrf_form_html': self.xsrf_form_html,
+        # })
+
+        if self.session_driver is "file":
+            self.session = FileSession(self.request.remote_ip)
+        elif self.session_driver is "memory":
+            self.session = MemorySession(self.request.remote_ip)
+
+        self.add_('session', self.session)
 
         content = self.render_template(template_name, **kwargs)
         self.write(content)

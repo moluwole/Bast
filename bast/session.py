@@ -1,16 +1,34 @@
 import shelve
+from datetime import datetime, timedelta
 import os
 
 
+class SessionManager(object):
+    SESSION_ID = "id_"
+    DEFAULT_SESSION_LIFETIME = 1200
+
+    def __init__(self, handler):
+        self.handler = handler
+        self.settings = {}
+        self._default_session_lifetime = datetime.utcnow() + timedelta(seconds=self.settings.get('session_lifetime', self.DEFAULT_SESSION_LIFETIME))
+        self._expires = self._default_session_lifetime
+        self._is_dirty = True
+        self.__init_session_driver()
+        self.__init_session_object()
+
+    def __init_session_driver(self):
+        session_name = self.settings.get('sid_name', self.SESSION_ID)
+
 class Session(object):
     flash_session = {}
+    session = {}
 
     def __init__(self, session_object, client_ip):
         self.session = session_object
         self.client_ip = client_ip
 
     def get_data(self):
-        session = dict()
+        session = {}
         if self.client_ip in self.session:
             session = self.session
 
@@ -69,20 +87,20 @@ class Session(object):
 
 class MemorySession(Session):
 
-    flash_session = {}
-
     def __init__(self, client_ip):
-        self.SESSION = {}
-        Session.__init__(self, self.SESSION, client_ip)
+        SESSION = {}
+        Session.__init__(self, SESSION, client_ip)
 
 
 class FileSession(Session):
+    SHELVE = None
+
     def __init__(self, client_ip):
         """
 
         """
         self.SHELVE = shelve.open('bast.session', writeback=True)
-        Session.__init__(self, self.SHELVE.dict, client_ip)
+        Session.__init__(self, self.SHELVE, client_ip)
         # print(self.SHELVE.)
 
     def __exit__(self, exc_type, exc_val, exc_tb):

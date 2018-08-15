@@ -1,27 +1,9 @@
 import shelve
-from datetime import datetime, timedelta
-import os
 
-
-class SessionManager(object):
-    SESSION_ID = "id_"
-    DEFAULT_SESSION_LIFETIME = 1200
-
-    def __init__(self, handler):
-        self.handler = handler
-        self.settings = {}
-        self._default_session_lifetime = datetime.utcnow() + timedelta(seconds=self.settings.get('session_lifetime', self.DEFAULT_SESSION_LIFETIME))
-        self._expires = self._default_session_lifetime
-        self._is_dirty = True
-        self.__init_session_driver()
-        self.__init_session_object()
-
-    def __init_session_driver(self):
-        session_name = self.settings.get('sid_name', self.SESSION_ID)
 
 class Session(object):
     flash_session = {}
-    session = {}
+    session = None
 
     def __init__(self, session_object, client_ip):
         self.session = session_object

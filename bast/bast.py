@@ -7,16 +7,12 @@
 
 import logging
 import os
-
-try:
-    from configparser import ConfigParser
-except ImportError:
-    import ConfigParser
-
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
+from .environment import load_env
+from colorama import init, Fore
 
 __author__ = "Majiyagbe Oluwole"
 __copyright__ = ""
@@ -39,11 +35,13 @@ class Bast(Application):
         """
         # self.settings = settings
         super().__init__(**settings)
+        init()
         self.host = '127.0.0.1'
         self.port = 2000
         self.debug = True
 
-        self.load_config()
+        # self.load_config()
+        load_env()
 
         self.handler = route.all().url
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
@@ -54,7 +52,6 @@ class Bast(Application):
         # append the URL for static files to exception
         self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
 
-    @property
     def run(self):
         """
         Function to Run the server. Server runs on host: 127.0.0.1 and port: 2000 by default. Debug is also set to false
@@ -68,39 +65,10 @@ class Bast(Application):
 
         parse_command_line()
 
-        logging.info("Starting Bast Server....")
-        logging.info("Bast Server Running on %s:%s" % (options.host, options.port))
+        print(Fore.GREEN + "Starting Bast Server....")
+        print(Fore.GREEN + "Bast Server Running on %s:%s" % (options.host, options.port))
 
         application = Application(self.handler, debug=options.debug)
         server = HTTPServer(application)
         server.listen(options.port, options.host)
         IOLoop.current().start()
-
-    def load_config(self):
-        """
-        Function to load configuration details from the config.ini file into environment variables.
-        """
-        config_path = os.path.abspath('.') + "/config/config.ini"
-        if not os.path.exists(config_path):
-            return
-
-        config = ConfigParser()
-        config.read(config_path)
-
-        #   config section
-        os.environ['APP_NAME'] = config['CONFIG']['APP_NAME']
-        os.environ['APP_KEY'] = config['CONFIG']['APP_KEY']
-
-        os.environ['DB_TYPE'] = config['DATABASE']['DB_TYPE']
-        os.environ['DB_NAME'] = config['DATABASE']['DB_NAME']
-        os.environ['DB_HOST'] = config['DATABASE']['DB_HOST']
-        os.environ['DB_USER'] = config['DATABASE']['DB_USER']
-        os.environ['DB_PASSWORD'] = config['DATABASE']['DB_PASSWORD']
-        os.environ['DB_PREFIX'] = config['DATABASE']['DB_PREFIX']
-        os.environ['ABS_PATH'] = os.path.abspath('.')
-
-        self.host = config['CONFIG']['HOST']
-        self.port = config['CONFIG']['PORT']
-        self.debug = config['CONFIG']['DEBUG']
-
-        os.environ['TEMPLATE_FOLDER'] = os.path.abspath('.') + "/public/templates"

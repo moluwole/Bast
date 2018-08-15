@@ -44,7 +44,9 @@ setup(name='Bast',
           'jinja2',
           'gitpython',
           'click',
-          'orator'
+          'orator',
+          'python-env'
+          'colorama'
       ],
       entry_points={
           'console_scripts': ['panther=bast.cli:main'],

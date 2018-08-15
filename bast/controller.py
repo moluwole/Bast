@@ -16,8 +16,8 @@ from .exception import BastException
 from .json_ import Json as json_
 from .view import TemplateRendering
 from .session import MemorySession, FileSession
-
 import os
+from tornado.gen import coroutine
 
 
 class Controller(RequestHandler, TemplateRendering):
@@ -28,10 +28,12 @@ class Controller(RequestHandler, TemplateRendering):
         super().__init__(application, request, **kwargs)
         self.request        = request
         self.application    = application
-        self.session_driver = "file"
-        self.session        = MemorySession(self.request.remote_ip)
+        self.session_driver = os.getenv("SESSION")
 
-    # def
+        if self.session_driver is "file":
+            self.session = FileSession(self.request.remote_ip)
+        elif self.session_driver is "memory":
+            self.session = MemorySession(self.request.remote_ip)
 
     def write_error(self, status_code, **kwargs):
         """
@@ -74,10 +76,10 @@ class Controller(RequestHandler, TemplateRendering):
         #     'xsrf_form_html': self.xsrf_form_html,
         # })
 
-        if self.session_driver is "file":
-            self.session = FileSession(self.request.remote_ip)
-        elif self.session_driver is "memory":
-            self.session = MemorySession(self.request.remote_ip)
+        # if self.session_driver is "file":
+        #     self.session = FileSession(self.request.remote_ip)
+        # elif self.session_driver is "memory":
+        #     self.session = MemorySession(self.request.remote_ip)
 
         self.add_('session', self.session)
 
@@ -197,6 +199,7 @@ class Controller(RequestHandler, TemplateRendering):
         self.write(json_.encode(data))
         self.set_header('Content-type', 'application/json')
 
+    @coroutine
     def get(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -212,6 +215,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def post(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -227,6 +231,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def put(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -242,6 +247,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def delete(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:

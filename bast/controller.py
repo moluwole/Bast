@@ -15,7 +15,6 @@ from tornado.util import unicode_type
 from .exception import BastException
 from .json_ import Json as json_
 from .view import TemplateRendering
-from .session import MemorySession, FileSession
 import os
 from tornado.gen import coroutine
 from bast import Bast
@@ -69,19 +68,6 @@ class Controller(RequestHandler, TemplateRendering):
         """
         if kwargs is None:
             kwargs = dict()
-
-        # kwargs.update({
-        #     'settings': self.settings,
-        #     'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
-        #     'request': self.request,
-        #     'xsrf_token': self.xsrf_token,
-        #     'xsrf_form_html': self.xsrf_form_html,
-        # })
-
-        # if self.session_driver is "file":
-        #     self.session = FileSession(self.request.remote_ip)
-        # elif self.session_driver is "memory":
-        #     self.session = MemorySession(self.request.remote_ip)
 
         self.add_('session', self.session)
 
@@ -293,7 +279,7 @@ class Controller(RequestHandler, TemplateRendering):
         args = self._get_arguments(name, source, strip=strip)
         if not args:
             if default is None:
-                return default
+                return None
         return args[-1]
 
     def _get_arguments(self, name, source, strip=True):

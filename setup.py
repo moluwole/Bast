@@ -45,7 +45,7 @@ setup(name='Bast',
           'gitpython',
           'click',
           'orator',
-          'python-env'
+          'python-env',
           'colorama'
       ],
       entry_points={

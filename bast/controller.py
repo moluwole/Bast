@@ -29,10 +29,10 @@ class Controller(RequestHandler, TemplateRendering):
         self.request        = request
         self.application    = application
         self.session_driver = os.getenv("SESSION")
-
+        #
         if self.session_driver is "file":
             self.session = FileSession(self.request.remote_ip)
-        elif self.session_driver is "memory":
+        else:
             self.session = MemorySession(self.request.remote_ip)
 
     def write_error(self, status_code, **kwargs):

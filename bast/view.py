@@ -6,7 +6,7 @@
 """
 
 import os
-from jinja2 import Environment, FileSystemLoader, TemplateNotFound
+from jinja2 import Environment, FileSystemLoader, TemplateNotFound, select_autoescape
 
 
 def script(js_file):
@@ -44,6 +44,7 @@ def image(image_file, alt_name="image"):
     if 'http' in image_file:
         return '<img src="' + image_file + '" alt="' + alt_name + '">'
     return '<img src="/images/' + image_file + '" alt="' + alt_name + '">'
+
 
 # def session():
 #     return

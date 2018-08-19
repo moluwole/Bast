@@ -5,7 +5,7 @@
     For full copyright and license information, view the LICENSE distributed with the Source Code
 """
 
-import logging
+import sys
 import os
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
@@ -22,6 +22,13 @@ __status__ = "Under Development"
 
 
 class Bast(Application):
+    image_folder    = ""
+    script_folder   = ""
+    css_folder      = ""
+    template_folder = ""
+
+    providers = {}
+
     def __init__(self, route, **settings):
         """
          Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
@@ -42,12 +49,12 @@ class Bast(Application):
 
         # self.load_config()
         load_env()
+        self.config()
 
         self.handler = route.all().url
-        self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
-        self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
-        self.handler.append(
-            (r'/images/(.*)', StaticFileHandler, {"path": os.path.abspath('.') + "/public/static/images"}))
+        self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": self.css_folder}))
+        self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": self.script_folder}))
+        self.handler.append((r'/images/(.*)', StaticFileHandler, {"path": self.image_folder}))
 
         # append the URL for static files to exception
         self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
@@ -69,6 +76,18 @@ class Bast(Application):
         print(Fore.GREEN + "Bast Server Running on %s:%s" % (options.host, options.port))
 
         application = Application(self.handler, debug=options.debug)
-        server = HTTPServer(application)
+        server = HTTPServer(application, **self.providers)
         server.listen(options.port, options.host)
         IOLoop.current().start()
+
+    def config(self):
+        sys.path.extend([os.path.abspath('.')])
+        from config import storage, provider
+        static_files = storage.STATIC_FILES
+        providers = provider.providers
+        os.environ['TEMPLATE_FOLDER'] = os.path.abspath('.') + "/" + static_files['template']
+
+        self.image_folder = os.path.abspath('.') + "/" + static_files['images']
+        self.css_folder = os.path.abspath('.') + "/" + static_files['css']
+        self.script_folder = os.path.abspath('.') + "/" + static_files['script']
+        self.providers = providers

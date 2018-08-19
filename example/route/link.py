@@ -9,4 +9,4 @@ from bast import Route
 route = Route()
 # route.middleware(['Api', 'Der']).get(url='/', controller='ExampleController.index')#.middleware(['Api'])
 route.post('/', 'ExampleController.index') #.middleware(['Api'])
-route.get('/in', 'ExampleController.io')
+route.get('/in', 'MineController.show')

@@ -18,22 +18,24 @@ from .view import TemplateRendering
 from .session import MemorySession, FileSession
 import os
 from tornado.gen import coroutine
+from bast import Bast
 
 
 class Controller(RequestHandler, TemplateRendering):
     method = None
     middleware = None
+    providers = {}
 
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
         self.request        = request
         self.application    = application
         self.session_driver = os.getenv("SESSION")
-        #
-        if self.session_driver is "file":
-            self.session = FileSession(self.request.remote_ip)
-        else:
-            self.session = MemorySession(self.request.remote_ip)
+        self.providers      = Bast.providers
+
+        print(self.providers)
+
+        self.session = self.providers['session'](self.request.remote_ip)
 
     def write_error(self, status_code, **kwargs):
         """

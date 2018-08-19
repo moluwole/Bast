@@ -87,9 +87,12 @@ class Bast(Application):
         static_files    = storage.STATIC_FILES
         providers       = provider.providers
 
+        # print(providers['session'])
+
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.abspath('.'), static_files['template'])
 
         self.image_folder   = os.path.join(os.path.abspath('.'), static_files['images'])
         self.css_folder     = os.path.join(os.path.abspath('.'), static_files['css'])
         self.script_folder  = os.path.join(os.path.abspath('.'), static_files['script'])
-        self.providers      = providers
+        self.providers.update(providers)
+

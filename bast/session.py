@@ -3,24 +3,27 @@ import shelve
 
 class Session(object):
     flash_session = {}
-    session = None
+    session = {}
 
     def __init__(self, session_object, client_ip):
-        self.session = session_object
+        self.session.update(session_object)
         self.client_ip = client_ip
 
     def get_data(self):
-        session = {}
+        session_ = {}
         if self.client_ip in self.session:
-            session = self.session
+            session_.update(self.session[self.client_ip])
 
         if self.client_ip in self.flash_session:
-            session.update(self.flash_session[self.client_ip])
+            session_.update(self.flash_session[self.client_ip])
 
-        if not session:
+        if not session_:
             return None
 
-        return session
+        return session_
+
+    def flush(self):
+        self.session = {}
 
     def get(self, key):
         session = self.get_data()

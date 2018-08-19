@@ -76,18 +76,20 @@ class Bast(Application):
         print(Fore.GREEN + "Bast Server Running on %s:%s" % (options.host, options.port))
 
         application = Application(self.handler, debug=options.debug)
-        server = HTTPServer(application, **self.providers)
+        server = HTTPServer(application)
         server.listen(options.port, options.host)
         IOLoop.current().start()
 
     def config(self):
         sys.path.extend([os.path.abspath('.')])
         from config import storage, provider
-        static_files = storage.STATIC_FILES
-        providers = provider.providers
-        os.environ['TEMPLATE_FOLDER'] = os.path.abspath('.') + "/" + static_files['template']
 
-        self.image_folder = os.path.abspath('.') + "/" + static_files['images']
-        self.css_folder = os.path.abspath('.') + "/" + static_files['css']
-        self.script_folder = os.path.abspath('.') + "/" + static_files['script']
-        self.providers = providers
+        static_files    = storage.STATIC_FILES
+        providers       = provider.providers
+
+        os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.abspath('.'), static_files['template'])
+
+        self.image_folder   = os.path.join(os.path.abspath('.'), static_files['images'])
+        self.css_folder     = os.path.join(os.path.abspath('.'), static_files['css'])
+        self.script_folder  = os.path.join(os.path.abspath('.'), static_files['script'])
+        self.providers      = providers

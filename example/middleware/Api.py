@@ -1,10 +1,13 @@
 from bast.validator import *
+from bast import validator
 
 
 class Api:
     def handle(self, request):
         # data = request.except_(['test'])
-        username = request.all()
+        # print(request)
+        username = request.get_argument('username')
+        print(username)
         data = "dsfghsgkjdfbgdhg"
         res = validator.add(Field('data', data).add_rule(is_alphabet())).run()
         print(res)

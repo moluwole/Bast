@@ -11,25 +11,27 @@ import traceback
 
 from tornado.web import RequestHandler
 from tornado.util import unicode_type
-from tornado.template import Loader
 
 from .exception import BastException
 from .json_ import Json as json_
 from .view import TemplateRendering
-
 import os
+from tornado.gen import coroutine
+from bast import Bast
 
 
 class Controller(RequestHandler, TemplateRendering):
     method = None
     middleware = None
+    providers = {}
 
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
         self.request        = request
         self.application    = application
+        self.session_driver = os.getenv("SESSION")
 
-    # def
+        self.session = Bast.session['session']
 
     def write_error(self, status_code, **kwargs):
         """
@@ -64,13 +66,7 @@ class Controller(RequestHandler, TemplateRendering):
         if kwargs is None:
             kwargs = dict()
 
-        kwargs.update({
-            'settings': self.settings,
-            'STATIC_URL': self.settings.get('static_url_prefix', 'public/static/'),
-            'request': self.request,
-            'xsrf_token': self.xsrf_token,
-            'xsrf_form_html': self.xsrf_form_html,
-        })
+        self.add_('session', self.session)
 
         content = self.render_template(template_name, **kwargs)
         self.write(content)
@@ -188,6 +184,7 @@ class Controller(RequestHandler, TemplateRendering):
         self.write(json_.encode(data))
         self.set_header('Content-type', 'application/json')
 
+    @coroutine
     def get(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -203,6 +200,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def post(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -218,6 +216,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def put(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -233,6 +232,7 @@ class Controller(RequestHandler, TemplateRendering):
             logging.error(str(e))
             raise BastException(500, "Controller Function not found")
 
+    @coroutine
     def delete(self, *args, **kwargs):
         try:
             if self.middleware is not None and len(self.middleware) > 0:
@@ -276,7 +276,7 @@ class Controller(RequestHandler, TemplateRendering):
         args = self._get_arguments(name, source, strip=strip)
         if not args:
             if default is None:
-                return default
+                return None
         return args[-1]
 
     def _get_arguments(self, name, source, strip=True):

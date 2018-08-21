@@ -5,18 +5,14 @@
     For full copyright and license information, view the LICENSE distributed with the Source Code
 """
 
-import logging
+import sys
 import os
-
-try:
-    from configparser import ConfigParser
-except ImportError:
-    import ConfigParser
-
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
+from .environment import load_env
+from colorama import init, Fore
 
 __author__ = "Majiyagbe Oluwole"
 __copyright__ = ""
@@ -26,6 +22,14 @@ __status__ = "Under Development"
 
 
 class Bast(Application):
+    image_folder    = ""
+    script_folder   = ""
+    css_folder      = ""
+    template_folder = ""
+
+    providers = {}
+    session = {}
+
     def __init__(self, route, **settings):
         """
          Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
@@ -39,17 +43,19 @@ class Bast(Application):
         """
         # self.settings = settings
         super().__init__(**settings)
+        init()
         self.host = '127.0.0.1'
         self.port = 2000
         self.debug = True
 
-        self.load_config()
+        # self.load_config()
+        load_env()
+        self.config()
 
         self.handler = route.all().url
-        self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/css"}))
-        self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": os.path.abspath(".") + "/public/static/js"}))
-        self.handler.append(
-            (r'/images/(.*)', StaticFileHandler, {"path": os.path.abspath('.') + "/public/static/images"}))
+        self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": self.css_folder}))
+        self.handler.append((r'/script/(.*)', StaticFileHandler, {"path": self.script_folder}))
+        self.handler.append((r'/images/(.*)', StaticFileHandler, {"path": self.image_folder}))
 
         # append the URL for static files to exception
         self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
@@ -67,39 +73,34 @@ class Bast(Application):
 
         parse_command_line()
 
-        logging.info("Starting Bast Server....")
-        logging.info("Bast Server Running on %s:%s" % (options.host, options.port))
+        print(Fore.GREEN + "Starting Bast Server....")
+        print(Fore.GREEN + "Bast Server Running on %s:%s" % (options.host, options.port))
 
         application = Application(self.handler, debug=options.debug)
         server = HTTPServer(application)
         server.listen(options.port, options.host)
         IOLoop.current().start()
 
-    def load_config(self):
-        """
-        Function to load configuration details from the config.ini file into environment variables.
-        """
-        config_path = os.path.abspath('.') + "/config/config.ini"
-        if not os.path.exists(config_path):
-            return
+    def config(self):
+        sys.path.extend([os.path.abspath('.')])
+        from config import config
 
-        config = ConfigParser()
-        config.read(config_path)
+        static_files    = config.STATIC_FILES
+        if config.SESSION_DRIVER is 'memory':
+            from bast import MemorySession
+            self.session.update({"session": MemorySession()})
+        else:
+            from bast import FileSession
+            self.session.update({'session': FileSession()})
 
-        #   config section
-        os.environ['APP_NAME'] = config['CONFIG']['APP_NAME']
-        os.environ['APP_KEY'] = config['CONFIG']['APP_KEY']
+        # providers       = provider.providers
 
-        os.environ['DB_TYPE'] = config['DATABASE']['DB_TYPE']
-        os.environ['DB_NAME'] = config['DATABASE']['DB_NAME']
-        os.environ['DB_HOST'] = config['DATABASE']['DB_HOST']
-        os.environ['DB_USER'] = config['DATABASE']['DB_USER']
-        os.environ['DB_PASSWORD'] = config['DATABASE']['DB_PASSWORD']
-        os.environ['DB_PREFIX'] = config['DATABASE']['DB_PREFIX']
-        os.environ['ABS_PATH'] = os.path.abspath('.')
+        # print(providers['session'])
 
-        self.host = config['CONFIG']['HOST']
-        self.port = config['CONFIG']['PORT']
-        self.debug = config['CONFIG']['DEBUG']
+        os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.abspath('.'), static_files['template'])
 
-        os.environ['TEMPLATE_FOLDER'] = os.path.abspath('.') + "/public/templates"
+        self.image_folder   = os.path.join(os.path.abspath('.'), static_files['images'])
+        self.css_folder     = os.path.join(os.path.abspath('.'), static_files['css'])
+        self.script_folder  = os.path.join(os.path.abspath('.'), static_files['script'])
+        # self.providers.update(providers)
+

@@ -54,7 +54,7 @@ You do not need to import your controller again
     from bast import Route
 
     route = Route()
-    route.get(url='/', controller='ExampleController.index')
+    route.get('/', 'ExampleController.index')
     
 Bast Controllers are Python Classes which inherit from the Bast Controller Class. Using ``panther create:controller ControllerName`` creates a controller file in the controller package. To render template in controller, use ``self.view('template.html', args=None)`` where the args is a Dictionary object and optional
 

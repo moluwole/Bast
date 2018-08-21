@@ -30,11 +30,8 @@ class Controller(RequestHandler, TemplateRendering):
         self.request        = request
         self.application    = application
         self.session_driver = os.getenv("SESSION")
-        self.providers      = Bast.providers
 
-        print(self.providers)
-
-        self.session = self.providers['session'](self.request.remote_ip)
+        self.session = Bast.session['session']
 
     def write_error(self, status_code, **kwargs):
         """

@@ -13,7 +13,6 @@ import shutil
 import click
 import re
 from subprocess import call
-from .environment import load_env
 from secrets import token_hex
 from colorama import init, Fore, Back
 
@@ -101,13 +100,15 @@ def view_creatr(filename):
 
 
 @main.command('generate:key', short_help="Generate the APP KEY")
-def make_key():
-    if not os.path.isfile('.env'):
+@click.argument('path', required=1)
+def make_key(path):
+    env_path = os.path.join(path, '.env')
+    if not os.path.isfile(env_path):
         click.echo(Fore.RED + ".env file not found. Scaffold a project to generate a key")
         return
 
     key = token_hex(16)
-    with open('.env', 'r') as file:
+    with open(env_path, 'r') as file:
         env_data = file.readlines()
 
     for line_number, line in enumerate(env_data):
@@ -115,7 +116,7 @@ def make_key():
             env_data[line_number] = 'APP_KEY={0}\n'.format(key)
             break
 
-    with open('.env', 'w') as file:
+    with open(env_path, 'w') as file:
         file.writelines(env_data)
 
     click.echo(Fore.GREEN + "Key Generated successfully: " + key)
@@ -128,7 +129,7 @@ def run(serverfile):
         click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to use the "run" command')
         return
 
-    call(['python ', serverfile])
+    call(['python', serverfile])
 
 
 @main.command('new', short_help="Create a new Bast Project")
@@ -140,13 +141,11 @@ def create_new(projectname):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    graffiti = """          
-    ___  ___   __________
-  / _ )/ _ | / __/_  __/
- / _  / __ |_\ \  / /   
-/____/_/ |_/___/ /_/                         
-            """
-    click.echo(Fore.GREEN + graffiti)
+    click.echo(Fore.GREEN + '    ___  ___   __________')
+    click.echo(Fore.GREEN + '  / _ )/ _ | / __/_  __/')
+    click.echo(Fore.GREEN + ' / _  / __ |_\ \  / /')
+    click.echo(Fore.GREEN + '/____/_/ |_/___/ /_/')
+
     click.echo(Fore.GREEN + "Creating Project at %s.... " % path)
     click.echo(Fore.GREEN + "Pulling Project Skeleton from Repo")
     try:
@@ -155,13 +154,14 @@ def create_new(projectname):
         click.echo(Fore.GREEN + "Setting up project")
 
         shutil.rmtree(path + "/.git")
-        # os.remove(path + "/.gitignore")
 
-        if not os.path.exists('.env'):
+        if not os.path.exists('/.env'):
+            shutil.copy(path + '/.env.example', path + '/.env')
+
+        env_file = path + "/.env"
+        if not os.path.isfile(env_file):
             shutil.copy('.env.example', '.env')
-
-        load_env()
-        call(['panther', 'generate:key'])
+        call(['panther', 'generate:key', path])
 
         click.echo(Fore.GREEN + "New Bast Project created at  %s " % path)
     except Exception as e:

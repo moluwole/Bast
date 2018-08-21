@@ -28,6 +28,7 @@ class Bast(Application):
     template_folder = ""
 
     providers = {}
+    session = {}
 
     def __init__(self, route, **settings):
         """
@@ -82,10 +83,17 @@ class Bast(Application):
 
     def config(self):
         sys.path.extend([os.path.abspath('.')])
-        from config import storage, provider
+        from config import config
 
-        static_files    = storage.STATIC_FILES
-        providers       = provider.providers
+        static_files    = config.STATIC_FILES
+        if config.SESSION_DRIVER is 'memory':
+            from bast import MemorySession
+            self.session.update({"session": MemorySession()})
+        else:
+            from bast import FileSession
+            self.session.update({'session': FileSession()})
+
+        # providers       = provider.providers
 
         # print(providers['session'])
 
@@ -94,5 +102,5 @@ class Bast(Application):
         self.image_folder   = os.path.join(os.path.abspath('.'), static_files['images'])
         self.css_folder     = os.path.join(os.path.abspath('.'), static_files['css'])
         self.script_folder  = os.path.join(os.path.abspath('.'), static_files['script'])
-        self.providers.update(providers)
+        # self.providers.update(providers)
 

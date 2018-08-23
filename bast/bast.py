@@ -12,6 +12,8 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
 from .environment import load_env
+from .session import MemorySession
+from .session import FileSession
 from colorama import init, Fore
 
 __author__ = "Majiyagbe Oluwole"
@@ -27,10 +29,14 @@ class Bast(Application):
     css_folder      = ""
     template_folder = ""
 
-    providers = {}
-    session = {}
+    host        = None
+    port        = None
+    debug       = None
 
-    def __init__(self, route, **settings):
+    providers   = {}
+    session     = {}
+
+    def __init__(self, route):
         """
          Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
 
@@ -41,16 +47,16 @@ class Bast(Application):
         Appropriate configurations are loaded from the config file into the os environment for use
         :param route:
         """
-        # self.settings = settings
-        super().__init__(**settings)
-        init()
-        self.host = '127.0.0.1'
-        self.port = 2000
-        self.debug = True
 
-        # self.load_config()
+        super(Bast, self).__init__()
+        init()
+
         load_env()
         self.config()
+
+        self.host = os.getenv("HOST", "127.0.0.1")
+        self.port = os.getenv("PORT", 2000)
+        self.debug = os.getenv("DEBUG", True)
 
         self.handler = route.all().url
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": self.css_folder}))
@@ -87,10 +93,8 @@ class Bast(Application):
 
         static_files    = config.STATIC_FILES
         if config.SESSION_DRIVER is 'memory':
-            from bast import MemorySession
             self.session.update({"session": MemorySession()})
         else:
-            from bast import FileSession
             self.session.update({'session': FileSession()})
 
         # providers       = provider.providers

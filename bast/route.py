@@ -19,6 +19,7 @@ class Route(object):
     method = None
     controller_location = 'controller'
     url = []
+    request_type = ""
 
     # def prefix(self, pref):
     #     return self
@@ -27,9 +28,9 @@ class Route(object):
         """
         Appends a Middleware to the route which is to be executed before the route runs
         """
-        if self.url[(len(self.url) - 1)] == (self.url_, self.controller, dict(method=self.method, middleware=None)):
+        if self.url[(len(self.url) - 1)] == (self.url_, self.controller, dict(method=self.method, request_type=self.request_type, middleware=None)):
             self.url.pop()
-        self.url.append((self.url_, self.controller, dict(method=self.method, middleware=args)))
+        self.url.append((self.url_, self.controller, dict(method=self.method, request_type=self.request_type, middleware=args)))
         return self
 
     def __return_controller__(self, controller):
@@ -62,52 +63,58 @@ class Route(object):
         """
         Gets the Controller and adds the route, controller and method to the url list for GET request
         """
+
+        self.request_type = 'GET'
         controller_class, controller_method = self.__return_controller__(controller)
 
         self.controller = controller_class
         self.method = controller_method
         self.url_ = url
 
-        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
+        self.url.append((url, controller_class, dict(method=controller_method, request_type=self.request_type, middleware=None)))
         return self
 
     def post(self, url, controller):
         """
         Gets the Controller and adds the route, controller and method to the url list for the POST request
         """
+
+        self.request_type = "POST"
         controller_class, controller_method = self.__return_controller__(controller)
 
         self.controller = controller_class
         self.method = controller_method
         self.url_ = url
 
-        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
+        self.url.append((url, controller_class, dict(method=controller_method, request_type=self.request_type, middleware=None)))
         return self
 
     def put(self, url, controller):
         """
         Gets the Controller and adds the route, controller and method to the url list for PUT request
         """
+        self.request_type = "PUT"
         controller_class, controller_method = self.__return_controller__(controller)
 
         self.controller = controller_class
         self.method = controller_method
         self.url_ = url
 
-        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
+        self.url.append((url, controller_class, dict(method=controller_method, request_type=self.request_type, middleware=None)))
         return self
 
     def delete(self, url, controller):
         """
         Gets the Controller and adds the route, controller and method to the url list for the DELETE request
         """
+        self.request_type = "DELETE"
         controller_class, controller_method = self.__return_controller__(controller)
 
         self.controller = controller_class
         self.method = controller_method
         self.url_ = url
 
-        self.url.append((url, controller_class, dict(method=controller_method, middleware=None)))
+        self.url.append((url, controller_class, dict(method=controller_method, request_type=self.request_type, middleware=None)))
         return self
 
     def all(self):

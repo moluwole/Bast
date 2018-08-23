@@ -21,12 +21,13 @@ from bast import Bast
 
 
 class Controller(RequestHandler, TemplateRendering):
-    method = None
-    middleware = None
-    providers = {}
+    method          = None
+    middleware      = None
+    providers       = {}
+    request_type    = None
 
     def __init__(self, application, request, **kwargs):
-        super().__init__(application, request, **kwargs)
+        super(Controller, self).__init__(application, request, **kwargs)
         self.request        = request
         self.application    = application
         self.session_driver = os.getenv("SESSION")
@@ -94,13 +95,14 @@ class Controller(RequestHandler, TemplateRendering):
 
         return return_value
 
-    def initialize(self, method, middleware):
+    def initialize(self, method, middleware, request_type):
         """
         Overridden initialize method from Tornado. Assigns the controller method and middleware attached to the route being executed
         to global variables to be used
         """
         self.method = method
         self.middleware = middleware
+        self.request_type = request_type
 
     def only(self, arguments):
         """
@@ -186,67 +188,59 @@ class Controller(RequestHandler, TemplateRendering):
 
     @coroutine
     def get(self, *args, **kwargs):
-        try:
-            if self.middleware is not None and len(self.middleware) > 0:
-                value = self.__run_middleware__(self.middleware)
-                if not value:
-                    return
-            func = getattr(self, self.method)
-            if func:
-                func()
-            else:
-                raise BastException(404, "Not Found")
-        except AttributeError as e:
-            logging.error(str(e))
-            raise BastException(500, "Controller Function not found")
+        if self.request_type is not 'GET':
+            raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
+        if self.middleware is not None and len(self.middleware) > 0:
+            value = self.__run_middleware__(self.middleware)
+            if not value:
+                return
+        func = getattr(self, self.method)
+        if func:
+            func()
+        else:
+            raise BastException(404, "Controller Function Not Found")
 
     @coroutine
     def post(self, *args, **kwargs):
-        try:
-            if self.middleware is not None and len(self.middleware) > 0:
-                value = self.__run_middleware__(self.middleware)
-                if not value:
-                    return
-            func = getattr(self, self.method)
-            if func:
-                func()
-            else:
-                raise BastException(404, "Not Found")
-        except AttributeError as e:
-            logging.error(str(e))
-            raise BastException(500, "Controller Function not found")
+        if self.request_type is not 'POST':
+            raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
+        if self.middleware is not None and len(self.middleware) > 0:
+            value = self.__run_middleware__(self.middleware)
+            if not value:
+                return
+        func = getattr(self, self.method)
+        if func:
+            func()
+        else:
+            raise BastException(404, "Controller Function Not Found")
 
     @coroutine
     def put(self, *args, **kwargs):
-        try:
-            if self.middleware is not None and len(self.middleware) > 0:
-                value = self.__run_middleware__(self.middleware)
-                if not value:
-                    return
-            func = getattr(self, self.method)
-            if func:
-                func()
-            else:
-                raise BastException(404, "Not Found")
-        except AttributeError as e:
-            logging.error(str(e))
-            raise BastException(500, "Controller Function not found")
+        if self.request_type is not 'PUT':
+            raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
+        if self.middleware is not None and len(self.middleware) > 0:
+            value = self.__run_middleware__(self.middleware)
+            if not value:
+                return
+        func = getattr(self, self.method)
+        if func:
+            func()
+        else:
+            raise BastException(404, "Controller Function Not Found")
 
     @coroutine
     def delete(self, *args, **kwargs):
-        try:
-            if self.middleware is not None and len(self.middleware) > 0:
-                value = self.__run_middleware__(self.middleware)
-                if not value:
-                    return
-            func = getattr(self, self.method)
-            if func:
-                func()
-            else:
-                raise BastException(404, "Not Found")
-        except AttributeError as e:
-            logging.error(str(e))
-            raise BastException(500, "Controller Function not found")
+        if self.request_type is not 'DELETE':
+            raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
+        if self.middleware is not None and len(self.middleware) > 0:
+            value = self.__run_middleware__(self.middleware)
+            if not value:
+                return
+        func = getattr(self, self.method)
+        if func:
+            func()
+        else:
+            raise BastException(404, "Controller Function Not Found")
 
     def get_argument(self, name, default=None, strip=True):
         """

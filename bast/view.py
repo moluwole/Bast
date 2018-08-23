@@ -55,11 +55,13 @@ class TemplateRendering:
     Base class to load the template directory from the OS Environment TEMPLATE_FOLDER variable
     """
 
+    dict_object = {}
+
     def __init__(self):
-        self.dictionary = {}
+        self.dict_object = {}
 
     def add_(self, key, _dict_):
-        self.dictionary[key] = _dict_
+        self.dict_object[key] = _dict_
         return self
 
     def render_template(self, template_name, **kwargs):
@@ -70,18 +72,19 @@ class TemplateRendering:
         env.globals['css'] = css
         env.globals['script'] = script
 
-        self.dictionary.update(**kwargs)
+        self.dict_object.update(**kwargs)
 
         try:
             template = env.get_template(template_name)
         except TemplateNotFound:
             raise TemplateNotFound(template_name)
-        content = template.render(self.dictionary)
+        content = template.render(self.dict_object)
         return content
 
     @classmethod
     def render_exception(cls, **kwargs):
         template_dir = os.path.dirname(os.path.realpath(__file__)) + "/exception"
+        print(template_dir)
         env = Environment(loader=FileSystemLoader(template_dir))
 
         try:

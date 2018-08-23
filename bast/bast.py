@@ -34,7 +34,7 @@ class Bast(Application):
     providers   = {}
     session     = {}
 
-    def __init__(self, route, **settings):
+    def __init__(self, route):
         """
          Bast Server Class. Runs on Tornado HTTP Server (http://www.tornadoweb.org/en/stable/)
 
@@ -46,7 +46,7 @@ class Bast(Application):
         :param route:
         """
 
-        super().__init__(**settings)
+        super(Bast, self).__init__()
         init()
 
         load_env()

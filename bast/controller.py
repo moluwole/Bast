@@ -21,9 +21,10 @@ from bast import Bast
 
 
 class Controller(RequestHandler, TemplateRendering):
-    method = None
-    middleware = None
-    providers = {}
+    method          = None
+    middleware      = None
+    providers       = {}
+    request_type    = None
 
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
@@ -94,13 +95,14 @@ class Controller(RequestHandler, TemplateRendering):
 
         return return_value
 
-    def initialize(self, method, middleware):
+    def initialize(self, method, middleware, request_type):
         """
         Overridden initialize method from Tornado. Assigns the controller method and middleware attached to the route being executed
         to global variables to be used
         """
         self.method = method
         self.middleware = middleware
+        self.request_type = request_type
 
     def only(self, arguments):
         """
@@ -187,6 +189,8 @@ class Controller(RequestHandler, TemplateRendering):
     @coroutine
     def get(self, *args, **kwargs):
         try:
+            if self.request_type is not 'GET':
+                raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
             if self.middleware is not None and len(self.middleware) > 0:
                 value = self.__run_middleware__(self.middleware)
                 if not value:
@@ -203,6 +207,8 @@ class Controller(RequestHandler, TemplateRendering):
     @coroutine
     def post(self, *args, **kwargs):
         try:
+            if self.request_type is not 'POST':
+                raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
             if self.middleware is not None and len(self.middleware) > 0:
                 value = self.__run_middleware__(self.middleware)
                 if not value:
@@ -219,6 +225,8 @@ class Controller(RequestHandler, TemplateRendering):
     @coroutine
     def put(self, *args, **kwargs):
         try:
+            if self.request_type is not 'PUT':
+                raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
             if self.middleware is not None and len(self.middleware) > 0:
                 value = self.__run_middleware__(self.middleware)
                 if not value:
@@ -235,6 +243,8 @@ class Controller(RequestHandler, TemplateRendering):
     @coroutine
     def delete(self, *args, **kwargs):
         try:
+            if self.request_type is not 'DELETE':
+                raise BastException(405, "Wrong Method. Expected Request Method:  %s" % self.request_type)
             if self.middleware is not None and len(self.middleware) > 0:
                 value = self.__run_middleware__(self.middleware)
                 if not value:

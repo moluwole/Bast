@@ -13,7 +13,7 @@ import shutil
 import click
 import re
 from subprocess import call
-from secrets import token_hex
+from base64 import b64encode
 from colorama import init, Fore, Back
 
 """ Handles the CLI commands and their respective Arguments """
@@ -107,7 +107,7 @@ def make_key(path):
         click.echo(Fore.RED + ".env file not found. Scaffold a project to generate a key")
         return
 
-    key = token_hex(16)
+    key = b64encode(os.urandom(32)).decode('utf-8')
     with open(env_path, 'r') as file:
         env_data = file.readlines()
 

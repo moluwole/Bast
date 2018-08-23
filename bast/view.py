@@ -82,6 +82,7 @@ class TemplateRendering:
     @classmethod
     def render_exception(cls, **kwargs):
         template_dir = os.path.dirname(os.path.realpath(__file__)) + "/exception"
+        print(template_dir)
         env = Environment(loader=FileSystemLoader(template_dir))
 
         try:

@@ -27,8 +27,12 @@ class Bast(Application):
     css_folder      = ""
     template_folder = ""
 
-    providers = {}
-    session = {}
+    host        = None
+    port        = None
+    debug       = None
+
+    providers   = {}
+    session     = {}
 
     def __init__(self, route, **settings):
         """
@@ -41,16 +45,16 @@ class Bast(Application):
         Appropriate configurations are loaded from the config file into the os environment for use
         :param route:
         """
-        # self.settings = settings
+
         super().__init__(**settings)
         init()
-        self.host = '127.0.0.1'
-        self.port = 2000
-        self.debug = True
 
-        # self.load_config()
         load_env()
         self.config()
+
+        self.host = os.getenv("HOST", "127.0.0.1")
+        self.port = os.getenv("PORT", 2000)
+        self.debug = os.getenv("DEBUG", True)
 
         self.handler = route.all().url
         self.handler.append((r'/css/(.*)', StaticFileHandler, {"path": self.css_folder}))

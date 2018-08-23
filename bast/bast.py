@@ -12,6 +12,8 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
 from .environment import load_env
+from .session import MemorySession
+from .session import FileSession
 from colorama import init, Fore
 
 __author__ = "Majiyagbe Oluwole"
@@ -91,10 +93,8 @@ class Bast(Application):
 
         static_files    = config.STATIC_FILES
         if config.SESSION_DRIVER is 'memory':
-            from bast import MemorySession
             self.session.update({"session": MemorySession()})
         else:
-            from bast import FileSession
             self.session.update({'session': FileSession()})
 
         # providers       = provider.providers

@@ -7,7 +7,7 @@ BAST Framework
 
 
 
-|travis| |circleci| |python| |license| |coverall| |status| |issues| |contributors|
+|travis| |circleci| |pversion| |license| |coverall| |status| |issues| |contributors| |downloads|
 
  
 About Bast
@@ -38,22 +38,22 @@ To create a setup a new project, use
 .. code:: bash
     
     $ panther new project_name
-    $ cd project
+    $ cd project_name
     $ panther run
     
 To visit the website and see if it's setup successfully, visit ``127.0.0.1:2000`` in your browser
 
-
-Bast uses a simple Routing file in the ``route`` folder called ``link.py``. You import in your controller from the controller folder, and then use ``route.get()`` for ``GET`` requests and ``route.post()`` for ``POST`` requests. Same goes for ``PUT`` and ``DELETE`` requests
+Update
+~~~~~~~~~
+Bast Routing is now relatively simple and much more easy to use. It embodies the way and manner Laravel defines it's URL's but instead of the ``@`` symbol, Bast makes use of the ``.``
+You do not need to import your controller again
 
 .. code:: python
 
     from bast import Route
-    from example.controller.test_controller import Mine
 
     route = Route()
-    route.get(url='/', controller_name=Mine, method_name='index')
-    route.post(url='/error', controller_name=Mine, method_name='error')
+    route.get('/', 'ExampleController.index')
     
 Bast Controllers are Python Classes which inherit from the Bast Controller Class. Using ``panther create:controller ControllerName`` creates a controller file in the controller package. To render template in controller, use ``self.view('template.html', args=None)`` where the args is a Dictionary object and optional
 
@@ -107,12 +107,12 @@ Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 .. _Orator ORM: https://orator-orm.com
 .. |travis| image:: https://travis-ci.org/moluwole/Bast.svg?branch=master
 .. |circleci| image:: https://circleci.com/gh/moluwole/Bast.svg?style=svg
-.. |python| image:: https://img.shields.io/badge/python-3.0+-blue.svg
 .. |license| image:: https://img.shields.io/github/license/moluwole/bast.svg
 .. |pversion| image:: https://img.shields.io/pypi/pyversions/Bast.svg
 .. |status| image:: https://img.shields.io/pypi/status/Bast.svg
 .. |issues| image:: https://img.shields.io/github/issues-raw/moluwole/Bast.svg
 .. |contributors| image:: https://img.shields.io/github/contributors/moluwole/Bast.svg
+.. |downloads| image:: https://pepy.tech/badge/bast
 .. |coverall| image:: https://coveralls.io/repos/github/moluwole/Bast/badge.svg?branch=master
     :target: https://coveralls.io/github/moluwole/Bast?branch=master
 

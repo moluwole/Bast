@@ -11,22 +11,24 @@ import sys
 
 from orator import DatabaseManager
 from orator.orm import Model
+from colorama import init, Fore
 
 
 class Models(Model):
     def __init__(self, **attributes):
         super().__init__(**attributes)
+        init()
         db = DatabaseManager(self.get_config())
         self.set_connection_resolver(db)
 
     @staticmethod
     def get_config():
-        db_type = os.environ['DB_TYPE']
-        db_host = os.environ['DB_HOST']
-        db_user = os.environ['DB_USER']
-        db_database = os.environ['DB_NAME']
-        db_password = os.environ['DB_PASSWORD']
-        db_prefix = os.environ['DB_PREFIX']
+        db_type     = os.getenv('DB_TYPE')
+        db_host     = os.getenv('DB_HOST')
+        db_user     = os.getenv('DB_USER')
+        db_database = os.getenv('DB_NAME')
+        db_password = os.getenv('DB_PASSWORD')
+        db_prefix   = os.getenv('DB_PREFIX')
 
         Models.check_packages(db_type)
 
@@ -43,17 +45,17 @@ class Models(Model):
 
     @staticmethod
     def check_packages(db_name):
-        print('Checking for required Database Driver')
+        print(Fore.GREEN + 'Checking for required Database Driver')
 
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
 
         if db_name.lower() == 'mysql':
-            if 'pymysql' not in installed_packages:
-                print('Installing required Database Driver')
-                os.system('pip install pymysql')
+            if 'PyMySQL' not in installed_packages:
+                print(Fore.GREEN + 'Installing required Database Driver')
+                subprocess.call(['pip', 'install', 'pymysql'])
 
         if db_name.lower() == 'postgresql':
             if 'psycopg2' not in installed_packages:
-                print('Installing required Database Driver')
-                os.system('pip install psycopg2')
+                print(Fore.GREEN + 'Installing required Database Driver')
+                subprocess.call(['pip', 'install', 'psycopg2'])

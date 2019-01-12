@@ -14,6 +14,8 @@ About Bast
 ~~~~~~~~~~~~~
 Bast is a Simple and Elegant Framework. The main aim of Bast is to create an enjoyable and creative Experience for Developers. Bast attempts to take the pain out of development by making common tasks used in the majority of web projects easy. Bast is aimed to be platform Independent and it's core Language is Python. Uses Python 3.*
 
+Read more in the `documentation on ReadTheDocs`_.
+
 Python Version
 ~~~~~~~~~~~~~~~~~
 Bast makes use of Python 3.0 and above in order to run
@@ -101,6 +103,7 @@ Eloquent Object Relation Mapping is achieved using `Orator ORM`_
 
 .. _file an issue: https://github.com/rtfd/readthedocs.org/issues
 .. _Read the Docs README: https://github.com/rtfd/readthedocs.org/blob/master/README.rst
+.. _documentation on ReadTheDocs: https://bast.readthedocs.io/en/latest/
 .. _project page: https://readthedocs.org/projects/pip/
 .. _Tornado HTTP Server: https://tornadoweb.org
 .. _Jinja Templating: https://jinja.pocoo.org/docs/2.10

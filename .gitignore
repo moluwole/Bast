@@ -1,9 +1,60 @@
-venv
-.vscode
-*.pyc
-bastenv
+# EDITOR Configs
+# PyCharm
 .idea
-bask.egg-info
+# VS Code
+.vscode
+
+# Python specific files
+*.pyc
+*.pyo
+
+# Generic files to ignore
+*~
+._*
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.patch
+*.diff
+*.empty
+*.orig
+*.noseids
+*.cprof
+.venv
+venv
+bastenv
+.coverage
+.pip
+coverage.xml
+htmlcov
+nosetests_*.xml
+tags
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
 build
 dist
 bast.egg-info
+
+*.egg-info
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt

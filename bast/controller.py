@@ -6,30 +6,29 @@
 """
 
 import importlib
-import logging
+import os
 import traceback
 
-from tornado.web import RequestHandler
-from tornado.util import unicode_type
-
-from .exception import BastException
-from .json_ import Json as json_
-from .view import TemplateRendering
-import os
 from tornado.gen import coroutine
+from tornado.util import unicode_type
+from tornado.web import RequestHandler
+
 from bast import Bast
+from .exception import BastException
+from .jsonifier import Json as json_
+from .view import TemplateRendering
 
 
 class Controller(RequestHandler, TemplateRendering):
-    method          = None
-    middleware      = None
-    providers       = {}
-    request_type    = None
+    method = None
+    middleware = None
+    providers = {}
+    request_type = None
 
     def __init__(self, application, request, **kwargs):
         super(Controller, self).__init__(application, request, **kwargs)
-        self.request        = request
-        self.application    = application
+        self.request = request
+        self.application = application
         self.session_driver = os.getenv("SESSION")
 
         self.session = Bast.session['session']

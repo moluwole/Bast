@@ -6,27 +6,20 @@
 """
 
 import os
-from git import Repo
-from .bast import __version__
-from .migration import CreateMigration, Migration
-import shutil
-import click
 import re
-from subprocess import call
+import shutil
 from base64 import b64encode
+from subprocess import call
+
+import click
 from colorama import init, Fore, Back
+from git import Repo
+
+from .bast import __version__
+from .environment import check_environment
+from .migration import CreateMigration, Migration
 
 """ Handles the CLI commands and their respective Arguments """
-
-
-def check():
-    server = os.path.abspath('.') + "/server.py"
-    config = os.path.abspath('.') + "/config"
-
-    if os.path.exists(server) and os.path.exists(config):
-        return True
-
-    return False
 
 
 @click.group()
@@ -38,11 +31,9 @@ def main():
 
 @main.command('create:controller', short_help='Creates a Controller File')
 @click.argument('filename', required=1)
+@check_environment
 def controller_creatr(filename):
     """Name of the controller file to be created"""
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the create:controller command')
-        return
 
     path = os.path.abspath('.') + '/controller'
     if not os.path.exists(path):
@@ -51,7 +42,7 @@ def controller_creatr(filename):
     # if os.path.isfile(path + )
 
     file_name = str(filename + '.py')
-    if os.path.isfile(path+"/" + file_name):
+    if os.path.isfile(path + "/" + file_name):
         click.echo(Fore.WHITE + Back.RED + "ERROR: Controller file exists")
         return
     controller_file = open(os.path.abspath('.') + '/controller/' + file_name, 'w+')
@@ -63,11 +54,8 @@ def controller_creatr(filename):
 
 @main.command('create:middleware', short_help="Creates a Middleware")
 @click.argument('filename', required=1)
+@check_environment
 def middleware_creatr(filename):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the create:middleware command')
-        return
-
     path = os.path.abspath('.') + '/middleware'
     if not os.path.exists(path):
         os.makedirs(path)
@@ -82,11 +70,9 @@ def middleware_creatr(filename):
 
 @main.command('create:view', short_help="Create a View File")
 @click.argument('filename', required=1)
+@check_environment
 def view_creatr(filename):
     """Name of the View File to be created"""
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the create:view command')
-        return
 
     path = os.path.abspath('.') + '/public/templates'
     if not os.path.exists(path):
@@ -101,11 +87,9 @@ def view_creatr(filename):
 
 @main.command('generate:key', short_help="Generate the APP KEY")
 @click.argument('path', required=1)
+@check_environment
 def make_key(path):
     env_path = os.path.join(path, '.env')
-    if not os.path.isfile(env_path):
-        click.echo(Fore.RED + ".env file not found. Scaffold a project to generate a key")
-        return
 
     key = b64encode(os.urandom(32)).decode('utf-8')
     with open(env_path, 'r') as file:
@@ -123,21 +107,18 @@ def make_key(path):
 
 
 @main.command('run', short_help="Run your Bast Server")
-@click.option('--serverfile', help="Name of the file to run", default='server.py')
-def run(serverfile):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to use the "run" command')
-        return
-
-    call(['python', serverfile])
+@click.option('--server_file', help="Name of the file to run", default='server.py')
+@check_environment
+def run(server_file):
+    call(['python', server_file])
 
 
 @main.command('new', short_help="Create a new Bast Project")
-@click.argument('projectname', required=1)
-def create_new(projectname):
+@click.argument('project_name', required=1)
+def create_new(project_name):
     """Name of the project"""
     git_url = "https://github.com/moluwole/Bast_skeleton"
-    path = os.path.abspath('.') + "/" + projectname
+    path = os.path.abspath('.') + "/" + project_name
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -172,11 +153,9 @@ def create_new(projectname):
 @click.argument('migration_file', required=1)
 @click.option('--create', default=True, help="Create the table. OPTIONAL")
 @click.option('--table', default=None, help="Name of the table to be created. OPTIONAL")
-def migration_creatr(migration_file, create, table):
+@check_environment
+def create_migration(migration_file, create, table):
     """Name of the migration file"""
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the create:migration command')
-        return
 
     migration = CreateMigration()
     if table is None:
@@ -187,11 +166,8 @@ def migration_creatr(migration_file, create, table):
 
 @main.command('migration:run', short_help="Run Migration")
 @click.option('--pretend', default=False, help="Simulates the Migration")
+@check_environment
 def migration_run(pretend):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the migration:run command')
-        return
-
     migration = Migration()
     migration.run_(pretend)
     click.echo(Fore.GREEN + 'Migration Run successful')
@@ -199,11 +175,8 @@ def migration_run(pretend):
 
 @main.command('migration:rollback', short_help="Roll Back last Migration")
 @click.option('--pretend', default=False, help="Simulates the Migration")
+@check_environment
 def migration_rollback(pretend):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the migration:rollback command')
-        return
-
     migration = Migration()
     count = migration.rollback_(pretend)
     click.echo(Fore.GREEN + 'Roll Back Executed. %s migrations rolled back' % count)
@@ -211,11 +184,8 @@ def migration_rollback(pretend):
 
 @main.command('migration:reset', short_help="Reset Migration")
 @click.option('--pretend', default=False, help="Simulate the Migration")
+@check_environment
 def migration_reset(pretend):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the migration:rollback command')
-        return
-
     migration = Migration()
     count = migration.reset_(pretend)
     click.echo(Fore.GREEN + 'Migration Reset successful. %s migrations has been reset' % count)
@@ -224,11 +194,8 @@ def migration_reset(pretend):
 @main.command('create:model', short_help="Create Model File")
 @click.argument('model_file', required=1)
 @click.option('--migration', default=True, help="Generate Migration File Also")
-def model_creatr(model_file, migration):
-    if not check():
-        click.echo(Fore.RED + 'ERROR: Ensure you are in a bast app to run the create:model command')
-        return
-
+@check_environment
+def create_model(model_file, migration):
     filename = snake_case(model_file) + ".py"
 
     directory_path = os.path.abspath('.') + '/models/'

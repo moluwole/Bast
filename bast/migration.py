@@ -9,14 +9,18 @@ import os
 import subprocess
 import sys
 
+import click
 from orator.database_manager import DatabaseManager
 from orator.migrations import MigrationCreator, Migrator, DatabaseMigrationRepository
+
+from .environment import check_environment
 
 
 class CreateMigration(MigrationCreator):
     """
     Handles the creation of the Migration file. Makes use of the Orator ORM for Migration
     """
+
     def __init__(self):
         self.path = os.path.abspath('.') + '/database/migrations/'
         if not os.path.exists(self.path):
@@ -30,6 +34,7 @@ class Migration(Migrator):
     """
     Handles the actions  to be performed on the Migration files
     """
+
     def __init__(self):
         """
         Initialize the Orator Migrator Class. Check if the migration table has been created. If not, Create the
@@ -73,17 +78,18 @@ class Migration(Migrator):
         return self.reset(self.path, pretend)
 
     @staticmethod
+    @check_environment
     def get_config():
         """
         Gets the config from the os.environ. This is used to create the config dict for use by the ORM
         :return: str, dict
         """
-        db_type = os.environ['DB_TYPE']
-        db_host = os.environ['DB_HOST']
-        db_user = os.environ['DB_USER']
-        db_database = os.environ['DB_NAME']
-        db_password = os.environ['DB_PASSWORD']
-        db_prefix = os.environ['DB_PREFIX']
+        db_type = os.getenv('DB_TYPE')
+        db_host = os.getenv('DB_HOST')
+        db_user = os.getenv('DB_USER')
+        db_database = os.getenv('DB_NAME')
+        db_password = os.getenv('DB_PASSWORD')
+        db_prefix = os.getenv('DB_PREFIX', '')  # Fix proposed by djunehor. Issue #20
 
         check = Migration.check_packages(db_type)
 
@@ -105,21 +111,19 @@ class Migration(Migrator):
         :param db_name:
         :return:
         """
-        print('Checking for required Database Driver')
+        click.echo('Checking for required Database Driver')
 
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
 
-        # print(installed_packages)
-
         if db_name.lower() == 'mysql':
             if 'PyMySQL' not in installed_packages:
-                print('Installing required Database Driver')
-                os.system('pip install pymysql')
+                click.echo('Installing required Database Driver')
+                click.echo(subprocess.check_output(["pip", "install", "pymysql"]))
 
         if db_name.lower() == 'postgresql':
             if 'psycopg2-binary' not in installed_packages:
-                print('Installing required Database Driver')
-                os.system('pip install psycopg2-binary')
+                click.echo('Installing required Database Driver')
+                click.echo(subprocess.check_output(['pip', 'install', 'psycopg2-binary']))
 
         return True

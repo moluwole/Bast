@@ -44,7 +44,9 @@ setup(name='Bast',
           'click',
           'orator',
           'python-env',
-          'colorama'
+          'colorama',
+          'nose',
+          'twine'
       ],
       entry_points={
           'console_scripts': ['panther=bast.cli:main'],

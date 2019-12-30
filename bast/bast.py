@@ -5,16 +5,18 @@
     For full copyright and license information, view the LICENSE distributed with the Source Code
 """
 
-import sys
 import os
+import sys
+
+from colorama import init, Fore
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application, StaticFileHandler
+
 from .environment import load_env
-from .session import MemorySession
 from .session import FileSession
-from colorama import init, Fore
+from .session import MemorySession
 
 __author__ = "Majiyagbe Oluwole"
 __copyright__ = ""
@@ -24,17 +26,17 @@ __status__ = "Under Development"
 
 
 class Bast(Application):
-    image_folder    = ""
-    script_folder   = ""
-    css_folder      = ""
+    image_folder = ""
+    script_folder = ""
+    css_folder = ""
     template_folder = ""
 
-    host        = None
-    port        = None
-    debug       = None
+    host = None
+    port = None
+    debug = None
 
-    providers   = {}
-    session     = {}
+    providers = {}
+    session = {}
 
     def __init__(self, route):
         """
@@ -64,7 +66,8 @@ class Bast(Application):
         self.handler.append((r'/images/(.*)', StaticFileHandler, {"path": self.image_folder}))
 
         # append the URL for static files to exception
-        self.handler.append((r'/exp/(.*)', StaticFileHandler, {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
+        self.handler.append((r'/exp/(.*)', StaticFileHandler,
+                             {'path': os.path.join(os.path.dirname(os.path.realpath(__file__)), "exception")}))
 
     def run(self):
         """
@@ -91,20 +94,15 @@ class Bast(Application):
         sys.path.extend([os.path.abspath('.')])
         from config import config
 
-        static_files    = config.STATIC_FILES
-        if config.SESSION_DRIVER is 'memory':
-            self.session.update({"session": MemorySession()})
-        else:
-            self.session.update({'session': FileSession()})
-
-        # providers       = provider.providers
-
-        # print(providers['session'])
+        static_files = config.STATIC_FILES
+        # Work in Progress
+        # if config.SESSION_DRIVER is 'memory':
+        #     self.session.update({"session": MemorySession()})
+        # else:
+        #     self.session.update({'session': FileSession()})
 
         os.environ['TEMPLATE_FOLDER'] = os.path.join(os.path.abspath('.'), static_files['template'])
 
-        self.image_folder   = os.path.join(os.path.abspath('.'), static_files['images'])
-        self.css_folder     = os.path.join(os.path.abspath('.'), static_files['css'])
-        self.script_folder  = os.path.join(os.path.abspath('.'), static_files['script'])
-        # self.providers.update(providers)
-
+        self.image_folder = os.path.join(os.path.abspath('.'), static_files['images'])
+        self.css_folder = os.path.join(os.path.abspath('.'), static_files['css'])
+        self.script_folder = os.path.join(os.path.abspath('.'), static_files['script'])

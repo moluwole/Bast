@@ -34,7 +34,7 @@ python-dateutil==2.8.1
 python-env==1.0.0
 pytz==2019.3
 pytzdata==2019.3
-PyYAML==5.3b1
+PyYAML==5.4
 readme-renderer==24.0
 requests==2.22.0
 requests-toolbelt==0.9.1

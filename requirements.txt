@@ -28,7 +28,7 @@ pendulum==1.5.1
 pkginfo==1.5.0.1
 pyaml==16.12.2
 pycparser==2.19
-Pygments==2.5.2
+Pygments==2.7.4
 pylev==1.3.0
 python-dateutil==2.8.1
 python-env==1.0.0

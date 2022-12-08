@@ -3,7 +3,7 @@ Bast==1.0.1
 bcrypt==3.1.7
 bleach==3.1.0
 blinker==1.4
-certifi==2019.11.28
+certifi==2022.12.7
 cffi==1.13.2
 chardet==3.0.4
 cleo==0.6.8
